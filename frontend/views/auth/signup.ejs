@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+   <html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.5.0/remixicon.css" crossorigin="">
+      <link rel="stylesheet" href="../../main.css">
+      <script>  var isAuthenticated = '<%-isAuthenticated%>'; var email= '<%-email%>';</script>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+      <script src="../../assets/scripts/navbar.js" defer></script>
+   </head>
+   <body>
+      <header>
+         <section class="navigation">
+            <div class="nav-container">
+              <div class="brand">
+                <a href="#!">🍀Seniority</a>
+              </div>
+              <nav>
+                <div class="nav-mobile">
+                  <a id="nav-toggle" href="#!"><span></span></a>
+                </div>
+                <ul class="nav-list">
+                  <li><a href="#!">Home</a></li>
+                  <li>
+                    <a href="#!">Services</a>
+                    <ul class="nav-dropdown">
+                      <li><a href="#!">Web Design</a></li>
+                      <li><a href="#!">Web Development</a></li>
+                      <li><a href="#!">Graphic Design</a></li>
+                    </ul>
+                  </li>
+                  <li><a href="#!">Contact</a></li>
+                </ul>
+              </nav>
+            </div>
+          </section>
+      </header>
+      <div class="signup">
+         <img src="../../assets/images/login-form.jpg" alt="image" class="signup__bg">
+
+         <form method = "POST" action="/auth/signup.html" class="signup__form">
+            <h1 class="signup__title">Sign up</h1>
+
+            <div class="signup__inputs">
+               <div class="signup__box">
+                  <input type="email"  name="email" placeholder="Email" required class="signup__input">
+                  <i class="ri-mail-fill"></i>
+               </div>
+
+               <div class="signup__box">
+                    <input  placeholder="Surname" name="surname" required class="signup__input">
+                    <i class="ri-user-fill"></i>
+               </div>
+                <div class="signup__box">
+                    <input  placeholder="Name" name  = "name" required class="signup__input">
+                    <i class="ri-user-fill"></i>
+                </div>
+                <div class="signup__box">
+                    <input  placeholder="Phone" name = "phone" required class="signup__input">
+                    <i class="ri-phone-fill"></i>
+                </div>
+                <div class="signup__box">
+                    <input type="date" placeholder="Birthdate" name = "birthdate" required class="signup__input">
+                    <i class="ri-calendar-fill"></i>
+                </div>
+               <div class="signup__box">
+                  <input type="password" placeholder="Password" name = "password" required class="signup__input">
+                  <i class="ri-lock-2-fill"></i>
+               </div>
+
+               <div class="signup__box">
+                <input type="password" placeholder="Confirm Password" name = "confirm_password" required class="signup__input">
+                <i class="ri-lock-2-fill"></i>
+             </div>
+            </div>
+
+            <div class="signup__check">
+               <div class="signup__check-box">
+                  <input type="checkbox" class="signup__check-input" id="user-check">
+                  <label for="user-check" class="signup__check-label">Remember me</label>
+               </div>
+
+               <a href="forgot-password.html" class="signup__forgot">Forgot Password?</a>
+            </div>
+
+            <button type="submit" class="signup__button">Sign up</button>
+
+            <div class="signup__register">
+               Already have an account? <a href="signin.html">Sign in</a>
+            </div>
+         </form>
+      </div>
+   </body>
+</html>

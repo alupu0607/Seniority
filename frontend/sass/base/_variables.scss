@@ -1,0 +1,15 @@
+
+$white-color: hsl(0, 0%, 100%);
+$black-color: hsl(0, 0%, 0%);
+$content-width: 1000px;
+$yellow-hover-color: #f8b500;
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+:root{
+   --white-color: hsl(0, 0%, 100%);
+   --black-color: hsl(0, 0%, 0%);
+   /*.5rem = 8px | 1rem = 16px ...*/
+   --body-font: 'Poppins', sans-serif;
+   --h1-font-size: 2rem;
+   --normal-font-size: 0.75rem;
+   --small-font-size: .8rem;
+}

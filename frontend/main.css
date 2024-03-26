@@ -1,0 +1,691 @@
+@charset "UTF-8";
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Poppins&display=swap");
+:root {
+  --white-color: hsl(0, 0%, 100%);
+  --black-color: hsl(0, 0%, 0%);
+  /*.5rem = 8px | 1rem = 16px ...*/
+  --body-font: "Poppins", sans-serif;
+  --h1-font-size: 2rem;
+  --normal-font-size: 0.75rem;
+  --small-font-size: .8rem;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body,
+input,
+button {
+  font-family: var(--body-font);
+  font-size: var(--normal-font-size);
+}
+
+a {
+  text-decoration: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+body {
+  font-family: "Poppins";
+}
+
+.navigation {
+  height: 70px;
+  background: #fff;
+}
+
+.nav-container {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.brand {
+  position: absolute;
+  padding-left: 20px;
+  float: left;
+  line-height: 70px;
+  text-transform: uppercase;
+  font-size: 1.4em;
+}
+@media (max-width: 43.74875em) {
+  .brand {
+    font-size: var(--small-font-size);
+  }
+}
+.brand a,
+.brand a:visited {
+  color: #0c0c0c;
+  text-decoration: none;
+}
+
+nav {
+  float: right;
+}
+nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+nav ul li {
+  float: left;
+  position: relative;
+}
+nav ul li a {
+  display: block;
+  padding: 10px 20px 0 20px;
+  line-height: 50px;
+  background: #fff;
+  color: #0c0c0c;
+  text-decoration: none;
+}
+nav ul li a::before {
+  transition: 300ms;
+  height: 5px;
+  content: "";
+  position: absolute;
+  background-color: #f8b500;
+  width: 0%;
+  bottom: 0px;
+}
+nav ul li a:hover::before {
+  width: 70%;
+}
+nav ul li a:not(:only-child):after {
+  padding-left: 4px;
+  content: " ▾";
+}
+nav ul li ul li {
+  min-width: 190px;
+}
+nav ul li ul li a {
+  padding: 15px;
+  line-height: 20px;
+}
+
+.nav-dropdown {
+  display: none;
+  position: absolute;
+  z-index: 1;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.15);
+}
+
+.nav-mobile {
+  display: none;
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: #fff;
+  height: 70px;
+  width: 70px;
+}
+
+#nav-toggle {
+  position: absolute;
+  left: 18px;
+  top: 22px;
+  cursor: pointer;
+  padding: 10px 35px 16px 0px;
+}
+#nav-toggle span,
+#nav-toggle span:before,
+#nav-toggle span:after {
+  cursor: pointer;
+  border-radius: 1px;
+  height: 5px;
+  width: 35px;
+  background: #f8b500;
+  position: absolute;
+  display: block;
+  content: "";
+  transition: all 300ms ease-in-out;
+}
+#nav-toggle span:before {
+  top: -10px;
+}
+#nav-toggle span:after {
+  bottom: -10px;
+}
+#nav-toggle.active span {
+  background-color: transparent;
+}
+#nav-toggle.active span:before, #nav-toggle.active span:after {
+  top: 0;
+}
+#nav-toggle.active span:before {
+  transform: rotate(45deg);
+}
+#nav-toggle.active span:after {
+  transform: rotate(-45deg);
+}
+
+.signin {
+  position: relative;
+  height: 100vh;
+  display: grid;
+  align-items: center;
+  justify-content: center;
+}
+.signin__bg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center;
+     object-position: center;
+}
+@media (max-width: 56.24875em) {
+  .signin__form {
+    width: 300px;
+    padding-inline: 1rem;
+  }
+  .signin__title {
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+}
+@media (min-width: 43.75em) {
+  .signin__form {
+    width: 500px;
+    padding-inline: 2.5rem;
+  }
+  .signin__title {
+    margin-bottom: 2rem;
+  }
+}
+.signin__form {
+  position: relative;
+  margin-inline: 1.5rem;
+  background-color: hsla(0, 0%, 100%, 0.01);
+  border: 2px solid hsla(0, 0%, 100%, 0.7);
+  padding: 2.5rem 1rem;
+  color: var(--white-color);
+  border-radius: 1rem;
+  -webkit-backdrop-filter: blur(10px);
+          backdrop-filter: blur(10px);
+}
+.signin__title {
+  text-align: center;
+  font-size: var(--h1-font-size);
+}
+.signin__inputs, .signin__box {
+  display: grid;
+}
+.signin__inputs {
+  row-gap: 1.25rem;
+  margin-bottom: 1rem;
+}
+.signin__box {
+  grid-template-columns: 1fr max-content;
+  -moz-column-gap: 0.75rem;
+       column-gap: 0.75rem;
+  align-items: center;
+  border: 2px solid hsla(0, 0%, 100%, 0.7);
+  padding-inline: 1.25rem;
+  border-radius: 4rem;
+}
+.signin__input, .signin__button {
+  border: none;
+  outline: none;
+}
+.signin__input {
+  width: 100%;
+  background: none;
+  color: var(--white-color);
+  padding-block: 1rem;
+}
+.signin__input::-moz-placeholder {
+  color: var(--white-color);
+}
+.signin__input::placeholder {
+  color: var(--white-color);
+}
+.signin__box i {
+  font-size: 1.25rem;
+}
+.signin__check, .signin__check-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.signin__check {
+  margin-bottom: 1rem;
+  font-size: var(--small-font-size);
+}
+.signin__check-box {
+  -moz-column-gap: 0.5rem;
+       column-gap: 0.5rem;
+}
+.signin__check-input {
+  width: 1rem;
+  height: 1rem;
+  accent-color: var(--white-color);
+}
+.signin__forgot {
+  color: var(--white-color);
+}
+.signin__forgot:hover {
+  text-decoration: underline;
+}
+.signin__button {
+  width: 100%;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  background-color: var(--white-color);
+  border-radius: 4rem;
+  color: var(--black-color);
+  font-weight: 500;
+  cursor: pointer;
+}
+.signin__button:hover {
+  background-color: #f8b500;
+}
+.signin__register {
+  text-align: center;
+}
+.signin__register a {
+  color: var(--white-color);
+  font-weight: 500;
+}
+.signin__register a:hover {
+  text-decoration: underline;
+}
+
+.signup {
+  position: relative;
+  min-height: 100vh;
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+.signup__bg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center;
+     object-position: center;
+}
+@media (max-width: 56.24875em) {
+  .signup__form {
+    width: 300px;
+    padding-inline: 1rem;
+  }
+  .signup__title {
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+}
+@media (min-width: 43.75em) {
+  .signup__form {
+    width: 500px;
+    padding-inline: 2.5rem;
+  }
+  .signup__title {
+    margin-bottom: 2rem;
+  }
+}
+.signup__form {
+  position: relative;
+  margin-inline: 1.5rem;
+  background-color: hsla(0, 0%, 100%, 0.01);
+  border: 2px solid hsla(0, 0%, 100%, 0.7);
+  padding: 2.5rem 1rem;
+  color: var(--white-color);
+  border-radius: 1rem;
+  -webkit-backdrop-filter: blur(10px);
+          backdrop-filter: blur(10px);
+}
+.signup__title {
+  text-align: center;
+  font-size: var(--h1-font-size);
+}
+.signup__inputs, .signup__box {
+  display: grid;
+}
+.signup__inputs {
+  row-gap: 1.25rem;
+  margin-bottom: 1rem;
+}
+.signup__box {
+  grid-template-columns: 1fr max-content;
+  -moz-column-gap: 0.75rem;
+       column-gap: 0.75rem;
+  align-items: center;
+  border: 2px solid hsla(0, 0%, 100%, 0.7);
+  padding-inline: 1.25rem;
+  border-radius: 4rem;
+}
+.signup__input, .signup__button {
+  border: none;
+  outline: none;
+}
+.signup__input {
+  width: 100%;
+  background: none;
+  color: var(--white-color);
+  padding-block: 1rem;
+}
+.signup__input::-moz-placeholder {
+  color: var(--white-color);
+}
+.signup__input::placeholder {
+  color: var(--white-color);
+}
+.signup__box i {
+  font-size: 1.25rem;
+}
+.signup__check, .signup__check-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.signup__check {
+  margin-bottom: 1rem;
+  font-size: var(--small-font-size);
+}
+.signup__check-box {
+  -moz-column-gap: 0.5rem;
+       column-gap: 0.5rem;
+}
+.signup__check-input {
+  width: 1rem;
+  height: 1rem;
+  accent-color: var(--white-color);
+}
+.signup__forgot {
+  color: var(--white-color);
+}
+.signup__forgot:hover {
+  text-decoration: underline;
+}
+.signup__button {
+  width: 100%;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  background-color: var(--white-color);
+  border-radius: 4rem;
+  color: var(--black-color);
+  font-weight: 500;
+  cursor: pointer;
+}
+.signup__button:hover {
+  background-color: #f8b500;
+}
+.signup__register {
+  text-align: center;
+}
+.signup__register a {
+  color: var(--white-color);
+  font-weight: 500;
+}
+.signup__register a:hover {
+  text-decoration: underline;
+}
+
+.forgot-password {
+  position: relative;
+  height: 100vh;
+  display: grid;
+  align-items: center;
+  justify-content: center;
+}
+.forgot-password__bg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center;
+     object-position: center;
+}
+@media (max-width: 56.24875em) {
+  .forgot-password__form {
+    width: 300px;
+    padding-inline: 1rem;
+  }
+  .forgot-password__title {
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+}
+@media (min-width: 43.75em) {
+  .forgot-password__form {
+    width: 500px;
+    padding-inline: 2.5rem;
+  }
+  .forgot-password__title {
+    margin-bottom: 2rem;
+  }
+}
+.forgot-password__form {
+  position: relative;
+  margin-inline: 1.5rem;
+  background-color: hsla(0, 0%, 100%, 0.01);
+  border: 2px solid hsla(0, 0%, 100%, 0.7);
+  padding: 2.5rem 1rem;
+  color: var(--white-color);
+  border-radius: 1rem;
+  -webkit-backdrop-filter: blur(10px);
+          backdrop-filter: blur(10px);
+}
+.forgot-password__title {
+  text-align: center;
+  font-size: var(--h1-font-size);
+}
+.forgot-password__inputs, .forgot-password__box {
+  display: grid;
+}
+.forgot-password__inputs {
+  row-gap: 1.25rem;
+  margin-bottom: 1rem;
+}
+.forgot-password__box {
+  grid-template-columns: 1fr max-content;
+  -moz-column-gap: 0.75rem;
+       column-gap: 0.75rem;
+  align-items: center;
+  border: 2px solid hsla(0, 0%, 100%, 0.7);
+  padding-inline: 1.25rem;
+  border-radius: 4rem;
+}
+.forgot-password__input, .forgot-password__button {
+  border: none;
+  outline: none;
+}
+.forgot-password__input {
+  width: 100%;
+  background: none;
+  color: var(--white-color);
+  padding-block: 1rem;
+}
+.forgot-password__input::-moz-placeholder {
+  color: var(--white-color);
+}
+.forgot-password__input::placeholder {
+  color: var(--white-color);
+}
+.forgot-password__box i {
+  font-size: 1.25rem;
+}
+.forgot-password__check, .forgot-password__check-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.forgot-password__check {
+  margin-bottom: 1rem;
+  font-size: var(--small-font-size);
+}
+.forgot-password__check-box {
+  -moz-column-gap: 0.5rem;
+       column-gap: 0.5rem;
+}
+.forgot-password__check-input {
+  width: 1rem;
+  height: 1rem;
+  accent-color: var(--white-color);
+}
+.forgot-password__forgot {
+  color: var(--white-color);
+}
+.forgot-password__forgot:hover {
+  text-decoration: underline;
+}
+.forgot-password__button {
+  width: 100%;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  background-color: var(--white-color);
+  border-radius: 4rem;
+  color: var(--black-color);
+  font-weight: 500;
+  cursor: pointer;
+}
+.forgot-password__button:hover {
+  background-color: #f8b500;
+}
+.forgot-password__register {
+  text-align: center;
+}
+.forgot-password__register a {
+  color: var(--white-color);
+  font-weight: 500;
+}
+.forgot-password__register a:hover {
+  text-decoration: underline;
+}
+
+.reset-password {
+  position: relative;
+  height: 100vh;
+  display: grid;
+  align-items: center;
+  justify-content: center;
+}
+.reset-password__bg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center;
+     object-position: center;
+}
+@media (max-width: 56.24875em) {
+  .reset-password__form {
+    width: 300px;
+    padding-inline: 1rem;
+  }
+  .reset-password__title {
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+}
+@media (min-width: 43.75em) {
+  .reset-password__form {
+    width: 500px;
+    padding-inline: 2.5rem;
+  }
+  .reset-password__title {
+    margin-bottom: 2rem;
+  }
+}
+.reset-password__form {
+  position: relative;
+  margin-inline: 1.5rem;
+  background-color: hsla(0, 0%, 100%, 0.01);
+  border: 2px solid hsla(0, 0%, 100%, 0.7);
+  padding: 2.5rem 1rem;
+  color: var(--white-color);
+  border-radius: 1rem;
+  -webkit-backdrop-filter: blur(10px);
+          backdrop-filter: blur(10px);
+}
+.reset-password__title {
+  text-align: center;
+  font-size: var(--h1-font-size);
+}
+.reset-password__inputs, .reset-password__box {
+  display: grid;
+}
+.reset-password__inputs {
+  row-gap: 1.25rem;
+  margin-bottom: 1rem;
+}
+.reset-password__box {
+  grid-template-columns: 1fr max-content;
+  -moz-column-gap: 0.75rem;
+       column-gap: 0.75rem;
+  align-items: center;
+  border: 2px solid hsla(0, 0%, 100%, 0.7);
+  padding-inline: 1.25rem;
+  border-radius: 4rem;
+}
+.reset-password__input, .reset-password__button {
+  border: none;
+  outline: none;
+}
+.reset-password__input {
+  width: 100%;
+  background: none;
+  color: var(--white-color);
+  padding-block: 1rem;
+}
+.reset-password__input::-moz-placeholder {
+  color: var(--white-color);
+}
+.reset-password__input::placeholder {
+  color: var(--white-color);
+}
+.reset-password__box i {
+  font-size: 1.25rem;
+}
+.reset-password__check, .reset-password__check-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.reset-password__check {
+  margin-bottom: 1rem;
+  font-size: var(--small-font-size);
+}
+.reset-password__check-box {
+  -moz-column-gap: 0.5rem;
+       column-gap: 0.5rem;
+}
+.reset-password__check-input {
+  width: 1rem;
+  height: 1rem;
+  accent-color: var(--white-color);
+}
+.reset-password__forgot {
+  color: var(--white-color);
+}
+.reset-password__forgot:hover {
+  text-decoration: underline;
+}
+.reset-password__button {
+  width: 100%;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  background-color: var(--white-color);
+  border-radius: 4rem;
+  color: var(--black-color);
+  font-weight: 500;
+  cursor: pointer;
+}
+.reset-password__button:hover {
+  background-color: #f8b500;
+}/*# sourceMappingURL=main.css.map */
