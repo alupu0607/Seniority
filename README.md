@@ -1,17 +1,12 @@
 # Device Web Recommender
 
-## Description
-
-Device Web Recommender is a web application that recommends electronic devices (phones, headphones, laptops, smartwatches, cameras, tablets, keyboards, mouses, PC's, TV's ...) to users based on price or other characteristics - e.g., similar model, facilities, color, autonomy etc.
-The analyzed data will be taken from multiple sources (via scraping) offered by profile sites that can be specified by the user. Statistics of the most popular products and the generated recommendations will also be available as RSS news feeds.
-
 ## Installation
 
 ```bash
 # Clone this repository
-git clone git@github.com:halexandru11/DeviceWebRecommender.git
+git clone git@github.com:https://github.com/alupu0607/Seniority.git
 # Go into the repository directory
-cd DeviceWebRecommender
+cd Seniority
 ```
 
 ## Technologies
@@ -22,8 +17,6 @@ cd DeviceWebRecommender
 - MVC architecture 
 - SQL injection prevention via Sequelize queries
 - Complete authentication
-- Administrator module (RESTful API for manipulating user data, import CSV + JSON files)
-- Scraper which automatically retrieves data from Emag, Altex, and MediaGalaxy and runs on a weekly schedule.
 
 
 ## Usage
@@ -46,8 +39,7 @@ In progress
 
 ## Authors
 
-- Lupu Andreea-Daniela
-- Hrițcan Alexandru
+Lupu Andreea-Daniela
 
 ## License
 
