@@ -15,7 +15,7 @@ const checkValidResetLink = async (req, res) => {
         const secret = JWT_SECRET + user.password
         try{
             const payload = jwt.verify(token, secret)
-            res.render('auth/reset-password', { id: id, token: token })
+            res.render('auth/reset-password', { id: id, token: token})
             //res.render(`auth/reset-password/${id}/${token}`)
         }catch(error){
             console.log(error.message)

@@ -3,8 +3,8 @@ const bcrypt = require("bcryptjs");
 
 const registerUser = async (req, res) => {
   const { email, surname, name, phone, birthdate, password, confirm_password } = req.body;
-  console.log(email, surname, name, phone, birthdate, password, confirm_password )
-  if ( !surname || !name || !phone || !birthdate || !email || !password || !confirm_password) {
+
+  if (!surname || !name || !phone || !birthdate || !email || !password || !confirm_password) {
     const emptyFields = [];
     if (!surname) emptyFields.push('surname');
     if (!name) emptyFields.push('name');
@@ -13,28 +13,19 @@ const registerUser = async (req, res) => {
     if (!email) emptyFields.push('email');
     if (!password) emptyFields.push('password');
     if (!confirm_password) emptyFields.push('confirm_password');
-    console.log("Empty fields:", emptyFields.join(', '));
-    return;
+    return res.status(400).render("auth/signup", { errorMessage: "Please fill in all the fields" });
   }
 
   if (password !== confirm_password) {
-    console.log("Password must match");
-    return;
+    return res.status(400).render("auth/signup", { errorMessage: "Passwords must match" });
   }
 
   try {
-    // Check if the email already exists
     const existingEmailUser = await User.findOne({ where: { email: email } });
     if (existingEmailUser) {
-      console.log("Email already exists");
-      res.render("auth/signup", {
-        email,
-      });
-      return res.status(400).json({ message: "Email already exists" });
+      return res.status(400).render("auth/signup", { errorMessage: "Email already exists" });
     }
 
-
-    // If both email and username are unique, create a new user
     const newUser = new User({
       email,
       surname,
@@ -48,9 +39,10 @@ const registerUser = async (req, res) => {
     newUser.password = await bcrypt.hash(newUser.password, salt);
 
     await newUser.save();
-    res.redirect("/auth/signin.html");
+    return res.status(201).redirect("/auth/signin.html");
   } catch (error) {
     console.error("Error registering user:", error);
+    return res.status(500).json({ errorMessage: "Internal Server Error" });
   }
 };
 

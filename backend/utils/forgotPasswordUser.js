@@ -41,7 +41,7 @@ const forgotPasswordUser = async (req, res) => {
         console.log(user)
         if (!user) {
           console.log("Wrong email");
-          return res.status(400).json({ message: "Incorrect email" });
+          return res.status(400).render('auth/forgot-password', {message: "Fail. Incorrect email." });
         }
         // create a one-time link valid for 15 mins
         const secret = JWT_SECRET + user.password
@@ -52,7 +52,7 @@ const forgotPasswordUser = async (req, res) => {
         const token = jwt.sign(payload, secret, {expiresIn: '15m'})
         const link = `http://localhost:3000/auth/reset-password/${user.id}/${token}.html`
         sendResetPasswordEmail(user.email, link)
-        res.status(200).json({ message: "Password reset initiated. Check your email for instructions." });
+        res.status(200).render('auth/forgot-password', {message: "Success. Check your email." });
     }
     catch(error){
         console.error("Error while querying the database:", error);

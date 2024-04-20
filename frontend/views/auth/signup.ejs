@@ -3,9 +3,10 @@
    <head>
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Seniority</title>
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.5.0/remixicon.css" crossorigin="">
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
       <link rel="stylesheet" href="../../main.css">
-      <script>  var isAuthenticated = '<%-isAuthenticated%>'; var email= '<%-email%>';</script>
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
       <script src="../../assets/scripts/navbar.js" defer></script>
    </head>
@@ -14,7 +15,7 @@
          <section class="navigation">
             <div class="nav-container">
               <div class="brand">
-                <a href="#!">🍀Seniority</a>
+                <a href="../info/about.html">🍀Seniority</a>
               </div>
               <nav>
                 <div class="nav-mobile">
@@ -30,7 +31,7 @@
                       <li><a href="#!">Graphic Design</a></li>
                     </ul>
                   </li>
-                  <li><a href="#!">Contact</a></li>
+                  <li><a href="../auth/signin.html">Login</a></li>
                 </ul>
               </nav>
             </div>
@@ -83,7 +84,11 @@
 
                <a href="forgot-password.html" class="signup__forgot">Forgot Password?</a>
             </div>
-
+            <% if (errorMessage) { %>
+               <div class="alert alert-danger">
+                 <%= errorMessage %>
+               </div>
+             <% } %>
             <button type="submit" class="signup__button">Sign up</button>
 
             <div class="signup__register">

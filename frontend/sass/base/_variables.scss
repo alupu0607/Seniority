@@ -9,7 +9,14 @@ $yellow-hover-color: #f8b500;
    --black-color: hsl(0, 0%, 0%);
    /*.5rem = 8px | 1rem = 16px ...*/
    --body-font: 'Poppins', sans-serif;
-   --h1-font-size: 2rem;
+   --h1-font-size: 1rem;
    --normal-font-size: 0.75rem;
    --small-font-size: .8rem;
+   --box-shadow: 0px 15px 25px rgba(0,0,0,0.08);
+   --transition: all 0.5s ease;
+   --c-dark: #212529;
+   --c-brand: #f8b500;
+   --c-brand-light: #fbf052;
+   --c-brand-rgb: 0, 255, 127; // mint green
+   --c-body: #727272;
 }

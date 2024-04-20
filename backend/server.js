@@ -7,7 +7,7 @@ const bodyParser = require('body-parser');
 const passport = require('passport')
 const {signinCheck} = require('./auth/passport')
 const session = require('express-session');
-const flash = require("express-flash");
+const flash = require("connect-flash");
 const cron = require('node-cron');
 signinCheck(passport)
 
@@ -21,7 +21,6 @@ app.use(session({
   secret: process.env.SECRET, 
   resave: false,
   saveUninitialized: true,
-  
 }));
 
 app.use(passport.initialize())

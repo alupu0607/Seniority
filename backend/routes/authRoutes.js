@@ -3,8 +3,8 @@ const router = express.Router();
 const authController = require('../controllers/authController');
 const protectRoute = require('../auth/protect');
 //SIGNIN
-router.get('/signin.html', protectRoute.allowIf,authController.getSignInPage);
-router.post('/signin.html', protectRoute.allowIf,authController.postSignIn);
+router.get('/signin.html',authController.getSignInPage);
+router.post('/signin.html',authController.postSignIn);
 
 //SIGNUP
 router.get('/signup.html',authController.getSignUpPage);

@@ -9,17 +9,14 @@ const signinCheck = (passport) => {
             const user = await User.findOne({ where: { email: email } });
             if (!user) {
               console.log(email, password);
-              console.log("Wrong email");
-              return done(null, false, { message: "Incorrect email" });
+              return done(null, false, { message: "Unfound email!", status: 404});
             }
             bcrypt.compare(password, user.password, (error, isMatch) => {
               if (error) throw error;
               if (isMatch) {
-                console.log("Auth complete")
-                return done(null, user);
+                return done(null, user,{status: 200 });
               } else {
-                console.log("Wrong password");
-               return done(null, false, { message: "Incorrect password" });
+               return done(null, false, { message: "Incorrect password!", status: 404 });
               }
             });
           } catch (error) {

@@ -7,7 +7,11 @@ const checkPasswordReset = require("../utils/checkPasswordReset")
 exports.getSignInPage = (req, res) => {
   const isAuthenticated = req.isAuthenticated();
   const email = isAuthenticated ? req.user.email : null;
-    res.render('auth/signin', {isAuthenticated, email});
+
+  const flashMessages = req.flash('error');
+  const errorMessage = flashMessages.length > 0 ? flashMessages[0] : null;
+ 
+  res.render('auth/signin', {isAuthenticated, email, errorMessage});
   };
   
   exports.postSignIn = (req, res) => {
@@ -15,15 +19,14 @@ exports.getSignInPage = (req, res) => {
   };
   
   exports.getSignUpPage = (req, res) => {
-    const isAuthenticated = req.isAuthenticated();
-    const email = isAuthenticated ? req.user.email : null;
-   
-    res.render('auth/signup', {isAuthenticated,email});
+    const errorMessage = req.errorMessage;
+    res.render('auth/signup', {errorMessage});
   };
   
   exports.postSignUp = (req, res) => {
     registerUser(req,res);
   };
+
 
   //Forgot-password
   exports.getForgotPasswordPage = (req, res) => {

@@ -1,0 +1,181 @@
+@use '../../components' as component;
+@use '../../utils' as utils;
+@use '../../base/variables' as variables;
+
+.btn {
+    &__text {
+        font-weight: 600;
+        font-size: 14px;
+        text-transform: uppercase;
+        border-radius: 0;
+        padding: 10px 24px;
+    }
+
+    &--brand {
+        background-color: var(--c-brand);
+        border-color: var(--c-brand);
+        color: white;
+
+        &:hover {
+            background-color: var(--c-brand-light);
+            border-color: var(--c-brand-light);
+            color: white;
+        }
+    }
+}
+
+#hero {
+    &__text {
+        color: var(--c-dark);
+
+        // Define gradient and background image
+        background: linear-gradient(
+            rgba(var(--c-brand-rgb), 0.507), 
+            rgba(var(--c-brand-rgb), 0.438)
+        );
+        background-position: center;
+        background-size: cover;
+    }
+}
+
+
+.section-title {
+    margin-bottom: 60px;
+}
+
+.section-title .line {
+    width: 60px;
+    height: 4px;
+    background-color: var(--c-brand);
+    margin: 16px auto 24px auto;
+}
+
+.section-title p {
+    /* max-width: 500px; */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+/* ICONBOX */
+.iconbox {
+    width: 70px;
+    height: 70px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(var(--c-brand-rgb), 0.1);
+    color: var(--c-brand);
+    font-size: 34px;
+    flex: none;
+}
+
+/* SERVICE */
+$service-hover-background: rgba(var(--c-brand-rgb), 0.2);
+$service-hover-color: rgb(26, 25, 25);
+
+.service {
+    position: relative;
+    overflow: hidden;
+    z-index: 2;
+
+    &::after {
+        content: "";
+        width: 40px;
+        height: 40px;
+        background: $service-hover-background;
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        transition: var(--transition);
+    }
+
+    &:hover::after {
+        width: 100%;
+        height: 100%;
+        background: var(--c-brand);
+        z-index: -1;
+    }
+
+    &:hover {
+        h5,
+        p {
+            color: $service-hover-color;
+        }
+
+        .iconbox {
+            background-color: rgba(255, 255, 255, 0.2);
+            color: $service-hover-color;
+        }
+    }
+}
+
+.service__iconbox {
+    &.iconbox {
+        i {
+            display: block;
+            font-size: 2rem;
+        }
+    }
+}
+
+.service__title,
+.service__description {
+    color: $service-hover-color;
+}
+
+
+
+
+$footer-color: rgba(255, 255, 255, 0.7);
+$footer-line-color: var(--c-brand);
+
+// Footer
+.footer {
+  padding-top: 120px;
+
+  &-top {
+    padding-bottom: 40px;
+    border-bottom: 1px solid rgba(36, 34, 34, 0.1);
+
+    h3,
+    h5 {
+      color: white;
+      margin-bottom: 0;
+    }
+
+    .line {
+      width: 40px;
+      height: 4px;
+      background-color: $footer-line-color;
+      margin-top: 12px;
+      margin-bottom: 24px;
+    }
+  }
+
+  &-bottom {
+    padding-top: 40px;
+    padding-bottom: 40px;
+  }
+
+  &-content {
+    ul {
+      list-style: none;
+      padding: 0;
+
+      li {
+        color: $footer-color;
+        margin-bottom: 8px;
+
+        a {
+          color: $footer-color;
+          text-decoration: none;
+
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+      }
+    }
+  }
+}
