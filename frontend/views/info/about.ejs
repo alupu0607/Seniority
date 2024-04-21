@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+    
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Seniority</title>
@@ -16,6 +17,8 @@
     <script src="../../assets/scripts/about.js" defer></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="../../assets/scripts/navbar.js" defer></script>
+    <script src="../../assets/scripts/map.js"async defer></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=<%= apiKey %>&callback=initMap" async defer></script>
 </head>
 
  <!-- NAVBAR -->
@@ -125,9 +128,16 @@
             <div class="row">
                 <div class="col-12 text-center" data-aos="fade-down" data-aos-delay="150">
                     <div class="section-title">
-                        <h1 class="section-title__heading display-4 fw-semibold">Find a suitable retirement home</h1>
+                        <h1 class="section-title__heading display-4 fw-semibold"><span class = "highlight1"><a href= "#!">Find</a> </span></span> a suitable retirement home</h1>
+                        <h3 class="section-title__heading display-4 fw-semibold">... or become <span class="highlight2"><a href= "#!">our new partner</a></span></h3>
                         <div class="line"></div>
-                        <p class="section-title__description" style="font-size: var(--h1-font-size);">We aim to facilitate communication between both the senior and the senior's family. Either find a partnered retirement home or visualize nearby options, but in this case you should be the one who contacts the retirement home.</p>
+                        <p class="section-title__description" style="font-size: var(--h1-font-size);">
+                            At Seniority, we are dedicated to fostering transparent and supportive environments for seniors and their families. Our mission is to provide comprehensive communication channels that empower both seniors and their loved ones to make informed decisions about their care and living arrangements.
+
+                            We believe in promoting transparency and accountability in retirement homes, ensuring that every individual receives the care and respect they deserve regardless of age. Whether you're searching for a partnered retirement home or exploring nearby options, we are committed to helping you find a solution that meets your unique needs and preferences.
+                        
+                            With a focus on compassion and quality of life, we strive to create inclusive communities where seniors can thrive and enjoy their golden years to the fullest. We believe that everyone deserves to live with dignity and receive the support they need at every stage of life.
+                        </p>
                     </div>
                 </div>
             </div>
@@ -163,7 +173,7 @@
         </div>
     </section>
     
-
+    <div id="map"></div>
     <!-- FOOTER  -->
     <footer class="footer bg-dark">
         <div class="footer-top">

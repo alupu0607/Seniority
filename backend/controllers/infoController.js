@@ -1,8 +1,10 @@
+require('dotenv').config();
+const apiKey = process.env.GOOGLE_API;
 
 exports.getAboutPage = (req, res) => {
-  const isAuthenticated = req.isAuthenticated();
-  const username = isAuthenticated ? req.user.username : null;
-    res.render('info/about', {isAuthenticated, username});
+  // const isAuthenticated = req.isAuthenticated();
+  // const username = isAuthenticated ? req.user.username : null;
+    res.render('info/about', {apiKey});
   };
 
   exports.getHelpPage = (req, res) => {
