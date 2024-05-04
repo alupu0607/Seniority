@@ -7,6 +7,12 @@ exports.getAboutPage = (req, res) => {
     res.render('info/about', {apiKey});
   };
 
+  exports.getAiPage = (req, res) => {
+    // const isAuthenticated = req.isAuthenticated();
+    // const username = isAuthenticated ? req.user.username : null;
+      res.render('info/ai', {apiKey});
+    };
+
   exports.getHelpPage = (req, res) => {
     const isAuthenticated = req.isAuthenticated();
     const username = isAuthenticated ? req.user.username : null;
