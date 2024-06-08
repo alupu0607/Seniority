@@ -1162,4 +1162,14 @@ img {
 }
 #microphone.active {
   background-color: #4cd137 !important;
+}
+
+.blurred {
+  color: transparent;
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  pointer-events: none;
+  transition: color 0.5s, text-shadow 0.5s;
 }/*# sourceMappingURL=main.css.map */

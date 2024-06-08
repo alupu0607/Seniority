@@ -8,6 +8,7 @@ recognition.lang = 'en-US';
 microphoneButton.addEventListener('click', () => {
     recognition.start();
     microphoneButton.classList.add('active');
+    blurFirstParagraph();
 });
 
 recognition.onresult = function(event) {
@@ -21,6 +22,13 @@ recognition.onspeechend = function() {
     microphoneButton.classList.remove('active');
 };
 
+
+function blurFirstParagraph() {
+    const firstParagraph = document.querySelector('.paragraph-to-blur');
+    if (firstParagraph) {
+        firstParagraph.classList.add('blurred');
+    }
+}
 function renderRecognizedText(rawText) {
     const date = new Date();
       const hour = date.getHours();
