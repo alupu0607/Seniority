@@ -62,6 +62,8 @@ $(document).ready(function() {
           }
           isParagraphBlurred = false;
           document.getElementById("text").disabled = false;
+          $("#send").prop('disabled', false);
+          $("#microphone").prop('disabled', false);
           return response.json();
       })
       .then(data => {
@@ -163,6 +165,8 @@ $(document).ready(function() {
         </div>`;
       $("#messageFormeight").append($.parseHTML(botHtml));
       document.getElementById("text").disabled = true;
+      $("#send").prop('disabled', true);
+      $("#microphone").prop('disabled', true);
       
 
       scrollToBottom();  
