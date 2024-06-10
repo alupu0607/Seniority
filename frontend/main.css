@@ -737,6 +737,129 @@ nav ul li ul li a {
   background-color: #f8b500;
 }
 
+.reset-password-retirement-home {
+  position: relative;
+  height: 100vh;
+  display: grid;
+  align-items: center;
+  justify-content: center;
+}
+.reset-password-retirement-home__bg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center;
+     object-position: center;
+}
+@media (max-width: 56.24875em) {
+  .reset-password-retirement-home__form {
+    width: 300px;
+    padding-inline: 1rem;
+  }
+  .reset-password-retirement-home__title {
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+}
+@media (min-width: 43.75em) {
+  .reset-password-retirement-home__form {
+    width: 500px;
+    padding-inline: 2.5rem;
+  }
+  .reset-password-retirement-home__title {
+    margin-bottom: 2rem;
+  }
+}
+.reset-password-retirement-home__form {
+  position: relative;
+  margin-inline: 1.5rem;
+  background-color: hsla(0, 0%, 100%, 0.01);
+  border: 2px solid hsla(0, 0%, 100%, 0.7);
+  padding: 2.5rem 1rem;
+  color: var(--white-color);
+  border-radius: 1rem;
+  -webkit-backdrop-filter: blur(50px);
+          backdrop-filter: blur(50px);
+}
+.reset-password-retirement-home__title {
+  text-align: center;
+  font-size: var(--h1-font-size);
+}
+.reset-password-retirement-home__inputs, .reset-password-retirement-home__box {
+  display: grid;
+}
+.reset-password-retirement-home__inputs {
+  row-gap: 1.25rem;
+  margin-bottom: 1rem;
+}
+.reset-password-retirement-home__box {
+  grid-template-columns: 1fr max-content;
+  -moz-column-gap: 0.75rem;
+       column-gap: 0.75rem;
+  align-items: center;
+  border: 2px solid hsla(0, 0%, 100%, 0.7);
+  padding-inline: 1.25rem;
+  border-radius: 4rem;
+}
+.reset-password-retirement-home__input, .reset-password-retirement-home__button {
+  border: none;
+  outline: none;
+}
+.reset-password-retirement-home__input {
+  width: 100%;
+  background: none;
+  color: var(--white-color);
+  padding-block: 1rem;
+}
+.reset-password-retirement-home__input::-moz-placeholder {
+  color: var(--white-color);
+}
+.reset-password-retirement-home__input::placeholder {
+  color: var(--white-color);
+}
+.reset-password-retirement-home__box i {
+  font-size: 1.25rem;
+}
+.reset-password-retirement-home__check, .reset-password-retirement-home__check-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.reset-password-retirement-home__check {
+  margin-bottom: 1rem;
+  font-size: var(--small-font-size);
+}
+.reset-password-retirement-home__check-box {
+  -moz-column-gap: 0.5rem;
+       column-gap: 0.5rem;
+}
+.reset-password-retirement-home__check-input {
+  width: 1rem;
+  height: 1rem;
+  accent-color: var(--white-color);
+}
+.reset-password-retirement-home__forgot {
+  color: var(--white-color);
+}
+.reset-password-retirement-home__forgot:hover {
+  text-decoration: underline;
+}
+.reset-password-retirement-home__button {
+  width: 100%;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  background-color: var(--white-color);
+  border-radius: 4rem;
+  color: var(--black-color);
+  font-weight: 500;
+  cursor: pointer;
+}
+.reset-password-retirement-home__button:hover {
+  background-color: #f8b500;
+}
+
 .retirement-home-signup {
   position: relative;
   min-height: 100vh;
@@ -912,6 +1035,272 @@ nav ul li ul li a {
 .verify-retirement-home__button:hover {
   background-color: #4cd137;
   color: black;
+}
+
+.retirement-home-signin {
+  position: relative;
+  height: 100vh;
+  display: grid;
+  align-items: center;
+  justify-content: center;
+}
+.retirement-home-signin__bg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center;
+     object-position: center;
+}
+@media (max-width: 56.24875em) {
+  .retirement-home-signin__form {
+    width: 300px;
+    padding-inline: 1rem;
+  }
+  .retirement-home-signin__title {
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+}
+@media (min-width: 43.75em) {
+  .retirement-home-signin__form {
+    width: 500px;
+    padding-inline: 2.5rem;
+  }
+  .retirement-home-signin__title {
+    margin-bottom: 2rem;
+  }
+}
+.retirement-home-signin__form {
+  position: relative;
+  margin-inline: 1.5rem;
+  background-color: hsla(0, 0%, 100%, 0.01);
+  border: 2px solid hsla(0, 0%, 100%, 0.7);
+  padding: 2.5rem 1rem;
+  color: var(--white-color);
+  border-radius: 1rem;
+  -webkit-backdrop-filter: blur(50px);
+          backdrop-filter: blur(50px);
+}
+.retirement-home-signin__title {
+  text-align: center;
+  font-size: var(--h1-font-size);
+}
+.retirement-home-signin__inputs, .retirement-home-signin__box {
+  display: grid;
+}
+.retirement-home-signin__inputs {
+  row-gap: 1.25rem;
+  margin-bottom: 1rem;
+}
+.retirement-home-signin__box {
+  grid-template-columns: 1fr max-content;
+  -moz-column-gap: 0.75rem;
+       column-gap: 0.75rem;
+  align-items: center;
+  border: 2px solid hsla(0, 0%, 100%, 0.7);
+  padding-inline: 1.25rem;
+  border-radius: 4rem;
+}
+.retirement-home-signin__input, .retirement-home-signin__button {
+  border: none;
+  outline: none;
+}
+.retirement-home-signin__input {
+  width: 100%;
+  background: none;
+  color: var(--white-color);
+  padding-block: 1rem;
+}
+.retirement-home-signin__input::-moz-placeholder {
+  color: var(--white-color);
+}
+.retirement-home-signin__input::placeholder {
+  color: var(--white-color);
+}
+.retirement-home-signin__box i {
+  font-size: 1.25rem;
+}
+.retirement-home-signin__check, .retirement-home-signin__check-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.retirement-home-signin__check {
+  margin-bottom: 1rem;
+  font-size: var(--small-font-size);
+}
+.retirement-home-signin__check-box {
+  -moz-column-gap: 0.5rem;
+       column-gap: 0.5rem;
+}
+.retirement-home-signin__check-input {
+  width: 1rem;
+  height: 1rem;
+  accent-color: var(--white-color);
+}
+.retirement-home-signin__forgot {
+  color: var(--white-color);
+}
+.retirement-home-signin__forgot:hover {
+  text-decoration: underline;
+}
+.retirement-home-signin__button {
+  width: 100%;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  background-color: var(--white-color);
+  border-radius: 4rem;
+  color: var(--black-color);
+  font-weight: 500;
+  cursor: pointer;
+}
+.retirement-home-signin__button:hover {
+  background-color: #f8b500;
+}
+.retirement-home-signin__register {
+  text-align: center;
+}
+.retirement-home-signin__register a {
+  color: var(--white-color);
+  font-weight: 500;
+}
+.retirement-home-signin__register a:hover {
+  text-decoration: underline;
+}
+
+.forgot-password-retirement-home {
+  position: relative;
+  height: 100vh;
+  display: grid;
+  align-items: center;
+  justify-content: center;
+}
+.forgot-password-retirement-home__bg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center;
+     object-position: center;
+}
+@media (max-width: 56.24875em) {
+  .forgot-password-retirement-home__form {
+    width: 300px;
+    padding-inline: 1rem;
+  }
+  .forgot-password-retirement-home__title {
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+}
+@media (min-width: 43.75em) {
+  .forgot-password-retirement-home__form {
+    width: 500px;
+    padding-inline: 2.5rem;
+  }
+  .forgot-password-retirement-home__title {
+    margin-bottom: 2rem;
+  }
+}
+.forgot-password-retirement-home__form {
+  position: relative;
+  margin-inline: 1.5rem;
+  background-color: hsla(0, 0%, 100%, 0.01);
+  border: 2px solid hsla(0, 0%, 100%, 0.7);
+  padding: 2.5rem 1rem;
+  color: var(--white-color);
+  border-radius: 1rem;
+  -webkit-backdrop-filter: blur(50px);
+          backdrop-filter: blur(50px);
+}
+.forgot-password-retirement-home__title {
+  text-align: center;
+  font-size: var(--h1-font-size);
+}
+.forgot-password-retirement-home__inputs, .forgot-password-retirement-home__box {
+  display: grid;
+}
+.forgot-password-retirement-home__inputs {
+  row-gap: 1.25rem;
+  margin-bottom: 1rem;
+}
+.forgot-password-retirement-home__box {
+  grid-template-columns: 1fr max-content;
+  -moz-column-gap: 0.75rem;
+       column-gap: 0.75rem;
+  align-items: center;
+  border: 2px solid hsla(0, 0%, 100%, 0.7);
+  padding-inline: 1.25rem;
+  border-radius: 4rem;
+}
+.forgot-password-retirement-home__input, .forgot-password-retirement-home__button {
+  border: none;
+  outline: none;
+}
+.forgot-password-retirement-home__input {
+  width: 100%;
+  background: none;
+  color: var(--white-color);
+  padding-block: 1rem;
+}
+.forgot-password-retirement-home__input::-moz-placeholder {
+  color: var(--white-color);
+}
+.forgot-password-retirement-home__input::placeholder {
+  color: var(--white-color);
+}
+.forgot-password-retirement-home__box i {
+  font-size: 1.25rem;
+}
+.forgot-password-retirement-home__check, .forgot-password-retirement-home__check-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.forgot-password-retirement-home__check {
+  margin-bottom: 1rem;
+  font-size: var(--small-font-size);
+}
+.forgot-password-retirement-home__check-box {
+  -moz-column-gap: 0.5rem;
+       column-gap: 0.5rem;
+}
+.forgot-password-retirement-home__check-input {
+  width: 1rem;
+  height: 1rem;
+  accent-color: var(--white-color);
+}
+.forgot-password-retirement-home__forgot {
+  color: var(--white-color);
+}
+.forgot-password-retirement-home__forgot:hover {
+  text-decoration: underline;
+}
+.forgot-password-retirement-home__button {
+  width: 100%;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  background-color: var(--white-color);
+  border-radius: 4rem;
+  color: var(--black-color);
+  font-weight: 500;
+  cursor: pointer;
+}
+.forgot-password-retirement-home__button:hover {
+  background-color: #f8b500;
+}
+.forgot-password-retirement-home__register {
+  text-align: center;
+}
+.forgot-password-retirement-home__register a {
+  color: var(--white-color);
+  font-weight: 500;
+}
+.forgot-password-retirement-home__register a:hover {
+  text-decoration: underline;
 }
 
 .btn__text {

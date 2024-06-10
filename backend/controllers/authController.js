@@ -1,10 +1,14 @@
 const registerUser = require("../utils/registerUser");
 const registerRetirementHome = require("../utils/registerRetirementHome");
 const signinUser = require('../utils/signinUser')
+const signinRetirementHome = require('../utils/signinRetirementHome');
 const forgotPasswordUser = require('../utils/forgotPasswordUser');
+const forgotPasswordRetirementHome = require('../utils/forgotPasswordRetirementHome');
 const checkValidResetLink = require("../utils/checkValidResetLink");
+const checkValidResetLinkRetirementHome = require("../utils/checkValidResetLinkRetirementHome");
 const checkValidVerifyLink = require("../utils/checkValidVerifyLink");
 const checkPasswordReset = require("../utils/checkPasswordReset");
+const checkPasswordResetRetirementHome = require("../utils/checkPasswordResetRetirementHome");
 const postButtonRetirementPage = require("../utils/postButtonRetirementPage");
 
 exports.getSignInPage = (req, res) => {
@@ -47,7 +51,20 @@ exports.getSignInPage = (req, res) => {
   exports.postVerifyRetirementPage = (req, res) => {
     postButtonRetirementPage(req,res);
   };
-
+  //SIGNIN retirement
+  exports.getRetirementPageSignin = (req, res) => {
+    const isAuthenticated = req.isAuthenticated();
+    const email = isAuthenticated ? req.user.email : null;
+  
+    const flashMessages = req.flash('error');
+    const errorMessage = flashMessages.length > 0 ? flashMessages[0] : null;
+   
+    res.render('auth/retirement-home-signin', {isAuthenticated, email, errorMessage});
+    };
+    
+    exports.postRetirementPageSignIn = (req, res) => {
+     signinRetirementHome(req,res)
+    };
   //Forgot-password
   exports.getForgotPasswordPage = (req, res) => {
     const isAuthenticated = req.isAuthenticated();
@@ -59,6 +76,24 @@ exports.getSignInPage = (req, res) => {
    forgotPasswordUser(req,res)
   };
 
+  // forgot password retirement home
+  exports.getForgotPasswordRetirementPage = (req, res) => {
+    const isAuthenticated = req.isAuthenticated();
+    const email = isAuthenticated ? req.user.email : null;
+    res.render('auth/forgot-password-retirement-home', {isAuthenticated,email});
+  };
+ 
+  exports.postForgotPasswordRetirementPage = (req, res) => {
+   forgotPasswordRetirementHome(req,res)
+  };
+  // reset password retirement home
+  exports.getResetPasswordRetirementPage = (req, res) => {
+    checkValidResetLinkRetirementHome(req,res)
+  };
+ 
+  exports.postResetPasswordRetirementPage = (req, res) => {
+   checkPasswordResetRetirementHome(req,res)
+  };
   //Reset-password
   exports.getResetPasswordPage = (req, res) => {
     checkValidResetLink(req,res)
