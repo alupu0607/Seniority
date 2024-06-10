@@ -1,0 +1,151 @@
+<html lang="en">
+    <head>
+       <meta charset="UTF-8">
+       <meta name="viewport" content="width=device-width, initial-scale=1.0">
+       <title>Seniority</title>
+       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.5.0/remixicon.css" crossorigin="">
+       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+       <link rel="stylesheet" href="../../main.css">
+       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+       <script src="../../assets/scripts/navbar.js" defer></script>
+    </head>
+    <body>
+       <header>
+          <section class="navigation">
+             <div class="nav-container">
+               <div class="brand">
+                 <a href="../../info/about.html">🍀SENIORITY</a>
+               </div>
+               <nav>
+                 <div class="nav-mobile">
+                   <a id="nav-toggle" href="#!"><span></span></a>
+                 </div>
+                 <ul class="nav-list">
+                   <li><a href="#!">Home</a></li>
+                   <li>
+                     <a href="#!">Services</a>
+                     <ul class="nav-dropdown">
+                       <li><a href="#!">Web Design</a></li>
+                       <li><a href="#!">Web Development</a></li>
+                       <li><a href="#!">Graphic Design</a></li>
+                     </ul>
+                   </li>
+                   <li><a href="../../auth/signin.html">Login</a></li>
+                 </ul>
+               </nav>
+             </div>
+           </section>
+       </header>
+       <div class="verify-retirement-home__container">
+        <% if (typeof errorMessage !== 'undefined' && errorMessage) { %>
+          <div class="alert alert-danger">
+            <%= errorMessage %>
+          </div>
+        <% } else { %>
+          <div class="card verify-retirement-home__card">
+            <div class="card-body">
+              <h5 class="card-title verify-retirement-home__title">Verify Retirement Home</h5>
+              <div class="mb-3 verify-retirement-home__info">
+                <div class="info-item">
+                  <strong>Email:</strong> <%= email %>
+                </div>
+                <div class="info-item">
+                  <strong>Retirement home name:</strong> <%= name %>
+                </div>
+                <div class="info-item">
+                  <strong>Rating:</strong> <%= rating %>
+                </div>
+                <div class="info-item">
+                  <strong>Phone:</strong> <%= phone %>
+                </div>
+                <div class="info-item">
+                  <strong>Website:</strong> <%= website %>
+                </div>
+                <div class="info-item">
+                  <strong>City:</strong> <%= city %>
+                </div>
+                <div class="info-item">
+                  <strong>Latitude:</strong> <%= latitude %>
+                </div>
+                <div class="info-item">
+                  <strong>Longitude:</strong> <%= longitude %>
+                </div>
+              </div>
+              <% if (typeof message !== 'undefined' && message) { %>
+                <% if (message.startsWith('Fail')) { %>
+                    <div class="alert alert-danger">
+                        <%= message %>
+                    </div>
+                <% } else if (message.startsWith('Success')){ %>
+                    <div class="alert alert-success">
+                        <%= message %>
+                    </div>
+                <% } %>
+            <% } %>
+              <form method="POST" action="" >
+                <input type="hidden" name="email" value="<%= email %>">
+                <input type="hidden" name="name" value="<%= name %>">
+                <input type="hidden" name="rating" value="<%= rating %>">
+                <input type="hidden" name="phone" value="<%= phone %>">
+                <input type="hidden" name="website" value="<%= website %>">
+                <input type="hidden" name="city" value="<%= city %>">
+                <input type="hidden" name="latitude" value="<%= latitude %>">
+                <input type="hidden" name="longitude" value="<%= longitude %>">
+                <button type="submit" class="btn btn-primary btn-block verify-retirement-home__button">VERIFY</button>
+              </form>
+            </div>
+          </div>
+        <% } %>
+      </div>
+</body>
+ <!-- FOOTER  -->
+ <footer class="footer bg-dark">
+    <div class="footer-top">
+        <div class="container">
+            <div class="row gy-5">
+                <div class="footer-top__item col-lg-3 col-sm-6">
+                    <h3 class="footer-top__title mb-0 text-white">🍀SENIORITY</h3>
+                    <div class="line"></div>
+                    <p class="text-white">Your retirement, made simpler.</p>
+                </div>
+                <div class="footer-top__item col-lg-3 col-sm-6">
+                    <h5 class="footer-top__title mb-0 text-white">SERVICES</h5>
+                    <div class="line"></div>
+                    <ul class="footer-top__list">
+                        <li><a href="#" class="text-white">AI Companion</a></li>
+                        <li><a href="#" class="text-white">Find a retirement home</a></li>
+                    </ul>
+                </div>
+                <div class="footer-top__item col-lg-3 col-sm-6">
+                    <h5 class="footer-top__title mb-0 text-white">ABOUT</h5>
+                    <div class="line"></div>
+                    <ul class="footer-top__list">
+                        <li><a href="#" class="text-white">Blog</a></li>
+                        <li><a href="#" class="text-white">Services</a></li>
+                        <li><a href="#" class="text-white">Company</a></li>
+                        <li><a href="#" class="text-white">Career</a></li>
+                    </ul>
+                </div>
+                <div class="footer-top__item col-lg-3 col-sm-6">
+                    <h5 class="footer-top__title mb-0 text-white">CONTACT</h5>
+                    <div class="line"></div>
+                    <ul class="footer-top__list">
+                        <li class="text-white">Iasi, Romania</li>
+                        <li class="text-white">+40756624999</li>
+                        <li class="text-white">0607andreea.ro@gmail.com</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <div class="container">
+            <div class="row g-4 justify-content-between">
+                <div class="col-auto">
+                    <p class="footer-bottom__text mb-0 text-white">© Copyright 🍀SENIORITY. All Rights Reserved</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+</html>

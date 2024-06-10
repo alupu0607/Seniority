@@ -11,6 +11,13 @@ router.get('/signup.html',authController.getSignUpPage);
 router.post('/signup.html',authController.postSignUp);
 router.get('/');
 
+// SIGNUP RETIREMENT
+router.get('/retirement-home-signup.html',authController.getSignUpRetirementPage);
+router.post('/retirement-home-signup.html',authController.postSignUpRetirementPage);
+
+// VERIFY RETIREMENT
+router.get('/verify-retirement-home/:token.html', authController.getVerifyRetirementPage);
+router.post('/verify-retirement-home/:token.html', authController.postVerifyRetirementPage);
 //FORGOTPASSWORD
 router.get('/forgot-password.html',authController.getForgotPasswordPage);
 router.post('/forgot-password.html',authController.postForgotPasswordPage);

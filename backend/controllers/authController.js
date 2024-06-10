@@ -1,8 +1,11 @@
 const registerUser = require("../utils/registerUser");
+const registerRetirementHome = require("../utils/registerRetirementHome");
 const signinUser = require('../utils/signinUser')
 const forgotPasswordUser = require('../utils/forgotPasswordUser');
 const checkValidResetLink = require("../utils/checkValidResetLink");
-const checkPasswordReset = require("../utils/checkPasswordReset")
+const checkValidVerifyLink = require("../utils/checkValidVerifyLink");
+const checkPasswordReset = require("../utils/checkPasswordReset");
+const postButtonRetirementPage = require("../utils/postButtonRetirementPage");
 
 exports.getSignInPage = (req, res) => {
   const isAuthenticated = req.isAuthenticated();
@@ -27,6 +30,23 @@ exports.getSignInPage = (req, res) => {
     registerUser(req,res);
   };
 
+  // retirement-home-signup
+  exports.getSignUpRetirementPage = (req, res) => {
+    const errorMessage = req.errorMessage;
+    res.render('auth/retirement-home-signup', {errorMessage});
+  };
+  
+  exports.postSignUpRetirementPage = (req, res) => {
+    registerRetirementHome(req,res);
+  };
+
+  exports.getVerifyRetirementPage = (req, res) => {
+    checkValidVerifyLink(req,res);
+  };
+
+  exports.postVerifyRetirementPage = (req, res) => {
+    postButtonRetirementPage(req,res);
+  };
 
   //Forgot-password
   exports.getForgotPasswordPage = (req, res) => {

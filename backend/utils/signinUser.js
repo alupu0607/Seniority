@@ -7,7 +7,7 @@ const signinUser = (req, res) => {
       console.log("Please fill in all the fields");
     } else {
       passport.authenticate("local", {
-        successRedirect: "/auth/signin.html",
+        successRedirect: "/info/about.html",
         failureRedirect: "/auth/signin.html",
         failureFlash: true,
       })(req, res);
