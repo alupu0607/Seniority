@@ -1,5 +1,30 @@
 const RetirementHome = require("../models/RetirementHome");
 
+const formatRetirementHomeDetails = (details) => {
+    return {
+        name: details.name,
+        rating: details.rating || 'N/A',
+        phone_number: details.formatted_phone_number || 'N/A',
+        website: details.website ||  'N/A',
+        url: details.url || 'N/A',
+        latitude: details.geometry.location.lat,
+        longitude: details.geometry.location.lng,
+        photos: null  // Placeholder for photos
+    };
+};
+
+const appendToRetirementHomesFile = (data) => {
+    try {
+        const existingData = JSON.parse(fs.readFileSync('../../retirement_homes.json', 'utf-8'));
+        existingData.push(data);
+        fs.writeFileSync('retirements_homes.json', JSON.stringify(existingData, null, 2));
+        console.log('Retirement home added to retirements_homes.json');
+    } catch (error) {
+        console.error('Error appending to retirements_homes.json:', error);
+    }
+};
+
+
 const postButtonRetirementPage = async (req, res) => {
     try {
         const { email, name, rating, phone, website, city, latitude, longitude } = req.body;

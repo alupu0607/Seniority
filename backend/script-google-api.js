@@ -79,7 +79,7 @@ Promise.all(fetchPromises)
 
 function writeResultsToFile() {
   const jsonContent = JSON.stringify(allResults, null, 2);
-  fs.writeFile('retirement_homes.json', jsonContent, err => {
+  fs.writeFile('../Seniority/frontend/retirement_homes2.json', jsonContent, err => {
     if (err) {
       console.error('Error writing JSON file:', err);
     } else {

@@ -40,6 +40,9 @@ app.use('/', infoRoutes)
 app.use('/info', infoRoutes);
 
 
+const retirementHomesRoutes = require('./routes/retirementHomesRoutes');
+app.use('/api/retirement-home-managment', retirementHomesRoutes);
+
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
