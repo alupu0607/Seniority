@@ -71,14 +71,7 @@ const signinCheck = (passport) => {
     }
     done(null, { id: `${type}:${userOrRetirementHome.id}`});
   });
-  // passport.deserializeUser(async (id, done) => {
-  //   try {
-  //     const user = await User.findByPk(id);
-  //     done(null, user);
-  //   } catch (error) {
-  //     done(error, null);
-  //   }
-  // });  
+ 
   passport.deserializeUser(async (obj, done) => {
     console.log(obj);
     try {

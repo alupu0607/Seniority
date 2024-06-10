@@ -34,7 +34,7 @@ const sendResetPasswordEmail = (email, link) => {
 };
 
 
-const forgotPasswordUser = async (req, res) => {
+const forgotPasswordUser = async (req, res) => {    
     const {email} = req.body
     try {
         const user = await User.findOne({ where: { email: email } });

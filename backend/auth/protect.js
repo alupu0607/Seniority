@@ -6,11 +6,22 @@ const protectRoute = (req, res, next) =>{
     console.log('Please log in to continue');
     res.redirect('/auth/signin');
   }
-  const allowIf = (req, res, next) =>{
+
+  const allowIfNotAuthenticated = (req, res,next) =>{
     if (!req.isAuthenticated()) {
       return next();
     }  
-   console.log('You are already authenticated', req.user.email);
+    console.log('You are already authenticated', req.user.email);
+     const errorMessage = ` You are already authenticated as ${req.user.email}. If you want to use this route, please logout first.`
+    return res.status(403).render('info/error-handler', { errorMessage });
+  }
+  const allowIfAuthenticated = (req, res,next) =>{
+    if (req.isAuthenticated()) {
+      return next();
+    }  
+    console.log('You should do this only if authenticated');
+     const errorMessage = ` You are already authenticated. If you want to use this route, please signin first.`
+    return res.status(403).render('info/error-handler', { errorMessage });
   }
 
 
@@ -31,6 +42,7 @@ const protectRoute = (req, res, next) =>{
   };
   module.exports = {
       protectRoute,
-      allowIf,
+      allowIfNotAuthenticated,
+      allowIfAuthenticated,
       checkIfUserIsAdmin
     };

@@ -22,16 +22,30 @@
                   <a id="nav-toggle" href="#!"><span></span></a>
                 </div>
                 <ul class="nav-list">
-                  <li><a href="#!">Home</a></li>
-                  <li>
-                    <a href="#!">Services</a>
-                    <ul class="nav-dropdown">
-                      <li><a href="#!">Web Design</a></li>
-                      <li><a href="#!">Web Development</a></li>
-                      <li><a href="#!">Graphic Design</a></li>
-                    </ul>
-                  </li>
-                  <li><a href="../auth/signin.html">Login</a></li>
+                  <% if (isAuthenticated) { %>
+                    <% if (accountType === 'User') { %>
+                      <li>
+                        <a href="#!">My Senior Account</a>
+                        <ul class="nav-dropdown">
+                            <li><a href="#!">Explore</a></li>
+                          <li><a href="#!" class="non-clickable">Profile Settings</a></li>
+                          <li><a href="#!" onclick="logout()">Logout</a></li>
+                        </ul>
+                      </li>
+                    <% } else if (accountType === 'RetirementHome') { %>
+                      <li>
+                        <a href="#!">My Partner Account</a>
+                        <ul class="nav-dropdown">
+                          <li><a href="#!" class="non-clickable">Welcome, <%= email %></a></li>
+                          <li><a href="#!">Manage</a></li>
+                          <li><a href="#!">Profile Details</a></li>
+                          <li><a href="/auth/logout">Logout</a></li>
+                        </ul>
+                      </li>
+                    <% } %>
+                  <% } else { %>
+                    <li><a href="../auth/signin.html">Login</a></li>
+                  <% } %>
                 </ul>
               </nav>
             </div>

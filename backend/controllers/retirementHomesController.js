@@ -2,7 +2,6 @@ const RetirementHome = require('../models/RetirementHome');
 exports.getRetirementHomes = async (req, res) => {
     try {
         const retirementHomes = await RetirementHome.findAll();
-        console.log(retirementHomes)
         res.status(200).json(retirementHomes);
     } catch (error) {
         console.error('Error fetching retirement homes:', error);
