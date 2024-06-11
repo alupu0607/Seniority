@@ -62,15 +62,19 @@ function createMarker(place) {
         `;
       });
     }
-
+    place.status = 'available';
+    const status = place.status === 'available' ? '<span style="color: green;">Available</span>' : '<span style="color: red;">Unavailable</span>';
+    const applyButton = place.status === 'available' ? `<button onclick="apply(${place.id})">Apply</button>` : '';
     const content = `
       <div>
         <strong>${place.name}</strong><br>
+        Status: ${status}<br>
         Latitude: ${place.latitude}<br>
         Longitude: ${place.longitude}<br>
         ${place.rating !== 'N/A' ? `Rating: ${place.rating}<br>` : ''}
         ${place.phone_number !== 'N/A' ? `Phone: ${place.phone_number}<br>` : ''}
         ${place.website !== 'N/A' ? `<a href="${place.website}" target="_blank">${place.website}</a><br>` : ''}
+        ${applyButton}
       </div>
       ${photoHtml}
     `;
@@ -86,4 +90,89 @@ function clearMarkers() {
     for (let i = 0; i < markers.length; i++) {
         markers[i].setMap(null);
     }
+}
+
+// function apply(idRetirementHome) {
+//     const email = '<%= email %>';
+//     const applicationData = {
+//         idRetirementHome: idRetirementHome,
+//         idUser: 1 
+//     };
+
+//     performPostFetch('/api/applications/application', applicationData, 'same-origin')
+//         .then(data => {
+//             console.log('Application created successfully:', data);
+//         })
+//         .catch(error => {
+//             console.error('Error creating application:', error);
+//         });
+// }
+
+
+function apply(idRetirementHome) {
+    const email = '<%= email %>'; // Assuming you embed the email using EJS
+    fetchUserId(email)
+        .then(userId => {
+            const applicationData = {
+                idRetirementHome: idRetirementHome,
+                idUser: userId
+            };
+
+            performPostFetch('/api/applications/application', applicationData, 'same-origin')
+                .then(data => {
+                    console.log('Application created successfully:', data);
+                })
+                .catch(error => {
+                    console.error('Error creating application:', error);
+                });
+        })
+        .catch(error => {
+            console.error('Error fetching user ID:', error);
+        });
+}
+
+function fetchUserId(email) {
+    return fetch(`/api/users/${email}`, {
+        method: 'GET',
+        credentials: 'same-origin'
+    })
+    .then(response => {
+        if (response.ok) {
+            return response.json();
+        } else {
+            throw new Error(response.statusText);
+        }
+    })
+    .then(data => {
+        return data.id;
+    })
+    .catch(error => {
+        console.error('Error fetching user ID:', error);
+        throw error;
+    });
+}
+
+
+function performPostFetch(url, data, credentials) {
+    return fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data),
+        credentials: credentials
+    })
+    .then(response => {
+        if (response.ok) {
+            console.log('POST request successful');
+            return response.json();
+        } else {
+            console.error('POST request failed:', response.statusText);
+            throw new Error(response.statusText); 
+        }
+    })
+    .catch(error => {
+        console.error('POST request failed:', error);
+        throw error; 
+    });
 }

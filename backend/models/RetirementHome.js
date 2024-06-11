@@ -1,5 +1,5 @@
 // retirementHome.js
-
+require("dotenv").config()
 const {Sequelize,  DataTypes } = require('sequelize'); 
 
 const sequelize= new Sequelize({

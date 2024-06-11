@@ -45,6 +45,12 @@ app.use('/explore', exploreRoutes);
 const retirementHomesRoutes = require('./routes/retirementHomesRoutes');
 app.use('/api/retirement-home-managment', retirementHomesRoutes);
 
+const applicationRoutes = require('./routes/applicationRoutes');
+app.use('/api/applications', applicationRoutes);
+
+const userRoutes = require('./routes/usersRoutes');
+app.use('/api/users', userRoutes);
+
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
