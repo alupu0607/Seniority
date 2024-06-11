@@ -39,6 +39,8 @@ const infoRoutes = require('./routes/infoRoutes');
 app.use('/', infoRoutes)
 app.use('/info', infoRoutes);
 
+const exploreRoutes = require('./routes/exploreRoutes');
+app.use('/explore', exploreRoutes);
 
 const retirementHomesRoutes = require('./routes/retirementHomesRoutes');
 app.use('/api/retirement-home-managment', retirementHomesRoutes);

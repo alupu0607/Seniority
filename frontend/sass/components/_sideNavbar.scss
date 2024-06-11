@@ -1,0 +1,147 @@
+
+@use '../utils' as utils;
+@use '../base/variables' as variables;
+@use '../utils/breakpoints' as breakpoints;
+body{
+    font-family: 'Poppins'
+}
+.sidebar-toggle-btn {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    cursor: pointer;
+    z-index: -1000;
+    background: white;
+    padding: 10px;
+    border-radius: 5px;
+    border-color: white;
+
+    &:hover {
+        border-color: white;
+    }
+
+    span {
+        font-size: 10px;
+        color: #fff;
+    }
+}
+
+
+.sidebar__container {
+    position: absolute;
+    width: 25%;
+    height: 100%;
+    left: -20%;
+    top: 70px;
+    background: white;
+    transition: left 0.4s ease;
+    z-index: 999;
+    transition: left 0.4s ease, width 0.4s ease;
+}
+.sidebar__container:hover {
+  width: 25%; 
+  @include breakpoints.breakpoint-down(medium) {
+    width: 45%; /* For devices smaller than a laptop */
+}
+}
+.sidebar__container.expanded {
+  width: 25%; 
+  @include breakpoints.breakpoint-down(medium) {
+    width: 45%; /* For devices smaller than a laptop */
+}
+}
+
+.sidebar--show {
+    left: 0;
+}
+
+.sidebar__header {
+    color: white;
+    font-size: 25px;
+    font-weight: 600;
+    line-height: 65px;
+    text-align: center;
+    background: var(--c-brand);;
+    letter-spacing: 1px;
+}
+
+.sidebar__menu {
+    background: var(--c-brand);;
+    height: 100%;
+    width: 100%;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar__menu-item {
+    line-height: 60px;
+    border-top: 1px solid rgba(255, 255, 255, 0.767);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.767);
+
+    &--active a {
+        color: cyan;
+        background-color: rgba(0,0,0,0.3);
+        border-left-color: cyan;
+    }
+
+    .sidebar__menu-item__link {
+        position: relative;
+        color: white;
+        text-decoration: none;
+        white-space: nowrap;
+        overflow: hidden; 
+        text-overflow: ellipsis; 
+        font-size: 18px; 
+        @include breakpoints.breakpoint-down(medium) {
+           font-size: 15px; /* For devices smaller than a laptop */
+        }
+        padding-left: 40px;
+        font-weight: 500;
+        display: block;
+        text-align: left;
+        width: 100%;
+        border-left: 3px solid transparent;
+        
+        &:hover {
+            background: rgba(0,0,0,0.3);
+        }
+
+        .sidebar__menu-item__link__caret {
+            position: absolute;
+            top: 50%;
+            right: 20px;
+            transform: translateY(-50%);
+            font-size: 22px;
+            transition: transform 0.4s;
+
+            &--rotate {
+                transform: translateY(-50%) rotate(-180deg);
+            }
+        }
+    }
+}
+
+
+// .sidebar__submenu {
+//     display: none;
+
+//     &--show {
+//         display: block;
+//     }
+
+//     .sidebar__submenu__item {
+//         line-height: 42px;
+
+//         .sidebar__submenu__item__link {
+//             font-size: 17px;
+//             color: #e6e6e6;
+//             padding-left: 80px;
+
+//             &:hover {
+//                 color: cyan !important;
+//                 background: #1e1e1e !important;
+//             }
+//         }
+//     }
+// }

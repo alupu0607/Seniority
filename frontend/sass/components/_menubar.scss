@@ -1,0 +1,129 @@
+@use '../utils' as utils;
+@use '../base/variables' as variables;
+@use '../utils/breakpoints' as breakpoints;
+.menu {
+  display: none;
+  color: white;
+  font-size: 18px; 
+  @include breakpoints.breakpoint-down(medium) {
+   font-size:15px;
+  }
+  background-color: var(--c-brand);
+  list-style-type: none;
+  padding: 0;
+  position: absolute;
+  top: 250px;
+  z-index: 10000;
+//   left: calc(100vw - 50%);
+}
+#menuToggle:checked + .menu {
+    display: block;
+  }
+.menu > li {
+  cursor: pointer;
+  padding: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.menu > li:hover {
+  background-color: var(--c-brand);
+}
+
+.submenu {
+  display: none;
+  padding-left: 20px;
+  max-height: 4 * 40px; 
+  overflow-y: auto;
+
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+  &::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: var(--c-brand-light);
+    border-radius: 4px;
+  }
+  &::-webkit-scrollbar-thumb:hover {
+    background: var(--c-brand);
+  }
+
+  & > li {
+    padding: 8px;
+    transition: background-color 0.3s ease;
+  }
+
+  & > li:hover {
+    background-color: rgba(0, 0, 0, 0.3);
+  }
+}
+
+.menu > li:hover .submenu {
+  display: block;
+}
+
+// .submenu > li {
+//   padding: 8px;
+//   transition: background-color 0.3s ease;
+// }
+
+// .submenu > li:hover {
+//   background-color: rgba(0,0,0,0.3);
+// }
+
+.active-filter {
+  font-weight: bold;
+  background-color: rgba(0,0,0,0.3);
+}
+
+.controls {
+  z-index: 100000;
+  position: absolute;
+  top:450px;
+  display: none;
+  margin-top: 10px;
+}
+
+.controls button {
+  font-size: 10px; 
+  margin-right: 10px;
+  padding: 10px;
+  cursor: pointer;
+  background-color: var(--c-brand);
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.controls button:hover {
+  background-color: var(--c-brand-light);
+}
+#menuToggle {
+    position: absolute;
+    top: 200px;
+    margin-bottom:20px;
+    z-index: 10001; 
+  }
+#menuToggle:checked + .controls {
+    display: block;
+  }
+
+
+  #menuToggle:hover,
+  #menuToggle:active,
+  #menuToggle:focus {
+    background-color: var(--c-brand); 
+    color: white;
+    outline: none; 
+  }
+
+  .menu-container {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    left: calc(100vw - 25%);
+    z-index: 10001; 
+    background: transparent;
+  }

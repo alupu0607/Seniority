@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ 
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Seniority</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <link rel="stylesheet" href="../../main.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js" defer></script>
+    <script src="https://unpkg.com/aos@next/dist/aos.js" defer></script>
+    <script src="../../assets/scripts/about.js" defer></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="../../assets/scripts/navbar.js" defer></script>
+    <script src="../../assets/scripts/map-partners.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=<%= apiKey %>&callback=initMap" async defer></script>
+    <script src="../../assets/scripts/logout.js" defer></script>
+    <script src="../../assets/scripts/sideNavbar.js" defer></script>
+</head>
+<body>
+    <header>
+        <section class="navigation">
+           <div class="nav-container">
+             <div class="brand">
+               <a href="../info/about.html">🍀SENIORITY</a>
+             </div>
+             <nav>
+               <div class="nav-mobile">
+                 <a id="nav-toggle" href="#!"><span></span></a>
+               </div>
+               <ul class="nav-list">
+                 <% if (isAuthenticated) { %>
+                    <% if (accountType === 'User') { %>
+                      <li>
+                        <a href="#!">My Senior Account</a>
+                        <ul class="nav-dropdown">
+                            <li><a href="../info/explore.html">Explore</a></li>
+                          <li><a href="#!" class="non-clickable">Profile Settings</a></li>
+                          <li><a href="#!" onclick="logout()">Logout</a></li>
+                        </ul>
+                      </li>
+                    <% } else if (accountType === 'RetirementHome') { %>
+                      <li>
+                        <a href="#!">My Partner Account</a>
+                        <ul class="nav-dropdown">
+                          <li><a href="#!" class="non-clickable">Welcome, <%= email %></a></li>
+                          <li><a href="#!">Manage</a></li>
+                          <li><a href="#!">Profile Details</a></li>
+                          <li><a href="#!" onclick="logout()">Logout</a></li>
+                        </ul>
+                      </li>
+                    <% } %>
+                  <% } else { %>
+                    <li><a href="../auth/signin.html">Login</a></li>
+                  <% } %>
+               </ul>
+             </nav>
+           </div>
+         </section>
+     </header>
+     <div class="sidebar-toggle-btn">
+        <span class="fas fa-bars"></span>
+    </div>
+
+    <div class="sidebar__container"  id="sidebar">
+        <!-- <div class="sidebar__header">
+            Side Menu
+        </div> -->
+        <ul class="sidebar__menu">
+            <li class="sidebar__menu-item sidebar__menu-item--active"><a href="../explore/partners.html" class="sidebar__menu-item__link">Partners</a></li>
+            <li class="sidebar__menu-item"><a href="#" class="sidebar__menu-item__link">My New Home</a></li>
+            <li class="sidebar__menu-item"><a href="#" class="sidebar__menu-item__link">My Activity</a></li>
+        </ul>
+    </div>
+    <div class="menu-container">
+    <button class="btn btn--brand me-2" id="menuToggle">🛠️</button>
+    <!-- <div id = "controls" class="controls">
+        <button id="filterBtn">FILTER</button>
+        <button id="clearBtn">CLEAR FILTERS</button>
+      </div> -->
+    <ul id="menu" class="menu"></ul>
+    </div>
+
+  <!-- <div id = "controls" class="controls">
+    <button id="filterBtn">FILTER</button>
+    <button id="clearBtn">CLEAR FILTERS</button>
+  </div> -->
+  <div id="map-partners" style = "height: 100vh;
+    width: 100%;"></div>
+
+
+    <footer class="footer bg-dark">
+        <div class="footer-top">
+            <div class="container">
+                <div class="row gy-5">
+                    <div class="footer-top__item col-lg-3 col-sm-6">
+                        <h3 class="footer-top__title mb-0 text-white">🍀SENIORITY</h3>
+                        <div class="line"></div>
+                        <p class="text-white">Your retirement, made simpler.</p>
+                    </div>
+                    <div class="footer-top__item col-lg-3 col-sm-6">
+                        <h5 class="footer-top__title mb-0 text-white">SERVICES</h5>
+                        <div class="line"></div>
+                        <ul class="footer-top__list">
+                            <li><a href="#" class="text-white">AI Companion</a></li>
+                            <li><a href="#" class="text-white">Find a retirement home</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-top__item col-lg-3 col-sm-6">
+                        <h5 class="footer-top__title mb-0 text-white">ABOUT</h5>
+                        <div class="line"></div>
+                        <ul class="footer-top__list">
+                            <li><a href="#" class="text-white">Blog</a></li>
+                            <li><a href="#" class="text-white">Services</a></li>
+                            <li><a href="#" class="text-white">Company</a></li>
+                            <li><a href="#" class="text-white">Career</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-top__item col-lg-3 col-sm-6">
+                        <h5 class="footer-top__title mb-0 text-white">CONTACT</h5>
+                        <div class="line"></div>
+                        <ul class="footer-top__list">
+                            <li class="text-white">Iasi, Romania</li>
+                            <li class="text-white">+40756624999</li>
+                            <li class="text-white">0607andreea.ro@gmail.com</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <div class="row g-4 justify-content-between">
+                    <div class="col-auto">
+                        <p class="footer-bottom__text mb-0 text-white">© Copyright 🍀SENIORITY. All Rights Reserved</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>   
+  <script>
+    let homesData;
+    let selectedCriteria = { city: null, rating: null, contact: null }; 
+    const filterElements = {};
+
+    function buildMenu(data) {
+      homesData = data; 
+      const { cities, ratings, contact } = processHomesData(data);
+      const menu = document.getElementById('menu');
+
+      const cityMenu = document.createElement('li');
+      cityMenu.innerText = 'Cities';
+      const citySubmenu = document.createElement('ul');
+      citySubmenu.className = 'submenu';
+
+      Object.keys(cities).forEach(city => {
+        const cityItem = document.createElement('li');
+        cityItem.innerText = city;
+        cityItem.addEventListener('click', () => handleFilterSelection('city', city, cityItem));
+        citySubmenu.appendChild(cityItem);
+        filterElements[city] = cityItem; 
+      });
+
+      cityMenu.appendChild(citySubmenu);
+      menu.appendChild(cityMenu);
+
+      const ratingMenu = document.createElement('li');
+      ratingMenu.innerText = 'Rating';
+      const ratingSubmenu = document.createElement('ul');
+      ratingSubmenu.className = 'submenu';
+
+      Object.keys(ratings).forEach(rating => {
+        const ratingItem = document.createElement('li');
+        ratingItem.innerText = rating;
+        ratingItem.addEventListener('click', () => handleFilterSelection('rating', rating, ratingItem));
+        ratingItem.addEventListener('dblclick', () => handleFilterDeselection('rating', ratingItem));
+        ratingSubmenu.appendChild(ratingItem);
+        filterElements[rating] = ratingItem;
+      });
+
+      ratingMenu.appendChild(ratingSubmenu);
+      menu.appendChild(ratingMenu);
+
+      const contactMenu = document.createElement('li');
+      contactMenu.innerText = 'Contact Information';
+      const contactSubmenu = document.createElement('ul');
+      contactSubmenu.className = 'submenu';
+
+      Object.keys(contact).forEach(contactType => {
+        const contactItem = document.createElement('li');
+        contactItem.innerText = contactType;
+        contactItem.addEventListener('click', () => handleFilterSelection('contact', contactType, contactItem));
+        contactItem.addEventListener('dblclick', () => handleFilterDeselection('contact', contactItem));
+        contactSubmenu.appendChild(contactItem);
+        filterElements[contactType] = contactItem;
+      });
+
+      contactMenu.appendChild(contactSubmenu);
+      menu.appendChild(contactMenu);
+    }
+
+    function handleFilterSelection(type, value, element) {
+    if (selectedCriteria[type] === value) {
+        selectedCriteria[type] = null;
+        console.log(`Deselected ${type}: ${value}`);
+        logIntersection();
+        element.classList.remove('active-filter');
+    } else {
+        if (selectedCriteria[type] && filterElements[selectedCriteria[type]]) {
+        filterElements[selectedCriteria[type]].classList.remove('active-filter');
+        logIntersection();
+        }
+        
+        selectedCriteria[type] = value;
+        console.log(`Selected ${type}: ${value}`);
+        
+        element.classList.add('active-filter');
+        logIntersection();
+    }
+    }
+
+    function logIntersection() {
+      if (!homesData) return;
+
+      let filteredHomes = homesData;
+      if (selectedCriteria.city) {
+        filteredHomes = filteredHomes.filter(home => home.city === selectedCriteria.city);
+      }
+      if (selectedCriteria.rating) {
+        filteredHomes = filteredHomes.filter(home => {
+          if (selectedCriteria.rating === '> 4.5') return home.rating > 4.5;
+          if (selectedCriteria.rating === '3.5 - 4.5') return home.rating > 3.5 && home.rating <= 4.5;
+          if (selectedCriteria.rating === '< 3.5') return home.rating < 3.5;
+        });
+      }
+      if (selectedCriteria.contact) {
+        if (selectedCriteria.contact === 'Website Available') {
+          filteredHomes = filteredHomes.filter(home => home.website !== 'N/A');
+        }
+        if (selectedCriteria.contact === 'Phone Available') {
+          filteredHomes = filteredHomes.filter(home => home.phone_number !== 'N/A');
+        }
+      }
+
+      console.log('Filtered Homes:', filteredHomes);
+      initMap(filteredHomes);
+    }
+
+    fetch('/api/retirement-home-managment/retirement-homes')
+      .then(response => response.json())
+      .then(data => {
+        if (Array.isArray(data)) {
+          buildMenu(data);
+        } else {
+          console.error('Retirement home data is not an array:', data);
+        }
+      })
+      .catch(error => {
+        console.error('Error loading retirement home data:', error);
+      });
+
+    function processHomesData(homes) {
+      console.log(homes);
+      const cities = {};
+      const ratings = { '> 4.5': [], '3.5 - 4.5': [], '< 3.5': [] };
+      const contact = { 'Website Available': [], 'Phone Available': [] };
+
+      homes.forEach(home => {
+        if (!cities[home.city]) {
+          cities[home.city] = [];
+        }
+        cities[home.city].push(home);
+
+        if (home.rating > 4.5) {
+          ratings['> 4.5'].push(home);
+        } else if (home.rating > 3.5 && home.rating <= 4.5) {
+          ratings['3.5 - 4.5'].push(home);
+        } else {
+          ratings['< 3.5'].push(home);
+        }
+
+        if (home.website !== 'N/A') {
+          contact['Website Available'].push(home);
+        }
+        if (home.phone_number !== 'N/A') {
+          contact['Phone Available'].push(home);
+        }
+      });
+
+      return { cities, ratings, contact };
+    }
+
+    //   document.getElementById('filterBtn').addEventListener('click', logIntersection);
+    //   document.getElementById('clearBtn').addEventListener('click', () => {
+    //   selectedCriteria = { city: null, rating: null, contact: null };
+
+    //   Object.values(filterElements).forEach(element => element.classList.remove('active-filter'));
+    //   console.log('All Homes:', homesData);
+    //   initMap(homesData);
+    // });
+
+    document.getElementById('menuToggle').addEventListener('click', function() {
+    const menu = document.getElementById('menu');
+    const controls = document.getElementById('controls');
+    menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+    controls.style.display = controls.style.display === 'block' ? 'none' : 'block';
+    });
+
+  </script>
+</body>
+</html>
