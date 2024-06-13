@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ 
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Seniority</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <link rel="stylesheet" href="../../main.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js" defer></script>
+    <script src="https://unpkg.com/aos@next/dist/aos.js" defer></script>
+    <script src="../../assets/scripts/about.js" defer></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="../../assets/scripts/navbar.js" defer></script>
+    <!-- <script src="../../assets/scripts/map-partners.js"></script> -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=<%= apiKey %>&callback=initMap" defer></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <script src="../../assets/scripts/logout.js" defer></script>
+    <script src="../../assets/scripts/sideNavbar.js" defer></script>
+    <script src="../../assets/scripts/my-new-home.js" defer></script>
+    <script> 
+        var email = '<%= email %>';
+    </script>
+    <style>
+
+    .status-pending {
+      color: yellow;
+      font-weight: bold;
+    }
+    .status-approved {
+      color: green;
+      font-weight: bold;
+    }
+    .status-rejected {
+      color: red;
+      font-weight: bold;
+    }
+    .card {
+        position: relative;
+        margin: 2px;
+        width: 22rem;
+    }
+    .close-button {
+        z-index: 300;
+        position: absolute;
+        top: 5px;
+        right: 10px;
+        background: transparent;
+        border: none;
+        font-size: 3rem; 
+        color: black;
+        cursor: pointer;
+        font-weight: bold; 
+    }
+    .close-button:hover {
+        color: black; 
+    }
+    .close-button:focus {
+        outline: none; 
+    }
+    </style>
+</head>
+<body>
+    <header>
+        <section class="navigation">
+           <div class="nav-container">
+             <div class="brand">
+               <a href="../info/about.html">🍀SENIORITY</a>
+             </div>
+             <nav>
+               <div class="nav-mobile">
+                 <a id="nav-toggle" href="#!"><span></span></a>
+               </div>
+               <ul class="nav-list">
+                 <% if (isAuthenticated) { %>
+                    <% if (accountType === 'User') { %>
+                      <li>
+                        <a href="#!">My Senior Account</a>
+                        <ul class="nav-dropdown">
+                            <li><a href="../info/explore.html">Explore</a></li>
+                          <li><a href="#!" class="non-clickable">Profile Settings</a></li>
+                          <li><a href="#!" onclick="logout()">Logout</a></li>
+                        </ul>
+                      </li>
+                    <% } else if (accountType === 'RetirementHome') { %>
+                      <li>
+                        <a href="#!">My Partner Account</a>
+                        <ul class="nav-dropdown">
+                          <li><a href="#!" class="non-clickable">Welcome, <%= email %></a></li>
+                          <li><a href="#!">Manage</a></li>
+                          <li><a href="#!">Profile Details</a></li>
+                          <li><a href="#!" onclick="logout()">Logout</a></li>
+                        </ul>
+                      </li>
+                    <% } %>
+                  <% } else { %>
+                    <li><a href="../auth/signin.html">Login</a></li>
+                  <% } %>
+               </ul>
+             </nav>
+           </div>
+         </section>
+     </header>
+     <div class="sidebar-toggle-btn">
+        <span class="fas fa-bars"></span>
+    </div>
+
+    <div class="sidebar__container"  id="sidebar">
+        <!-- <div class="sidebar__header">
+            Side Menu
+        </div> -->
+        <ul class="sidebar__menu">
+            <li class="sidebar__menu-item sidebar__menu-item"><a href="../explore/partners.html" class="sidebar__menu-item__link">Partners</a></li>
+            <li class="sidebar__menu-item sidebar__menu-item--active"><a href="../explore/my-new-home.html" class="sidebar__menu-item__link">My New Home</a></li>
+            <li class="sidebar__menu-item"><a href="#" class="sidebar__menu-item__link">My Activity</a></li>
+        </ul>
+    </div>
+        <div class="container d-flex justify-content-center align-items-center full-height">
+            <div class="card" style="width: 22rem; height: 100vh;">
+                <button class="close-button" aria-label="Close">&times;</button>
+                <div class="card-img-top" id="mapRetirementHome" style="height: 50vh; width: 100%; background-image: url('../../assets/images/question-mark.jpg');";></div>
+               
+                <div class="card-body">
+                    <h5 class="card-title" id="retirementHomeName">No retirement home yet</h5>
+                    <div id="retirementHomeRating" class="text-warning"></div>
+                    <p class="card-text" id="retirementHomeDescription"></p>
+                    <p id="applicationStatus">Status: -- </p>
+                </div>
+                <ul class="list-group list-group-light list-group-small">
+                    <li class="list-group-item px-4" id="retirementHomeCity">City: -- </li>
+                    <li class="list-group-item px-4" id="retirementHomePhoneNumber">Phone number: -- </li>
+                    <a href="#" class="list-group-item px-4" id="retirementHomeWebsite" style = "color: blue;">Website: --</a>
+                </ul>
+                <div class="card-body">
+                    <a href="#" class="card-link" id="retirementHomeWebsite"></a>
+                    <a href="#" class="card-link"></a>
+                </div>
+            </div>
+            
+            
+    </div>
+
+    <footer class="footer bg-dark">
+        <div class="footer-top">
+            <div class="container">
+                <div class="row gy-5">
+                    <div class="footer-top__item col-lg-3 col-sm-6">
+                        <h3 class="footer-top__title mb-0 text-white">🍀SENIORITY</h3>
+                        <div class="line"></div>
+                        <p class="text-white">Your retirement, made simpler.</p>
+                    </div>
+                    <div class="footer-top__item col-lg-3 col-sm-6">
+                        <h5 class="footer-top__title mb-0 text-white">SERVICES</h5>
+                        <div class="line"></div>
+                        <ul class="footer-top__list">
+                            <li><a href="#" class="text-white">AI Companion</a></li>
+                            <li><a href="#" class="text-white">Find a retirement home</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-top__item col-lg-3 col-sm-6">
+                        <h5 class="footer-top__title mb-0 text-white">ABOUT</h5>
+                        <div class="line"></div>
+                        <ul class="footer-top__list">
+                            <li><a href="#" class="text-white">Blog</a></li>
+                            <li><a href="#" class="text-white">Services</a></li>
+                            <li><a href="#" class="text-white">Company</a></li>
+                            <li><a href="#" class="text-white">Career</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-top__item col-lg-3 col-sm-6">
+                        <h5 class="footer-top__title mb-0 text-white">CONTACT</h5>
+                        <div class="line"></div>
+                        <ul class="footer-top__list">
+                            <li class="text-white">Iasi, Romania</li>
+                            <li class="text-white">+40756624999</li>
+                            <li class="text-white">0607andreea.ro@gmail.com</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <div class="row g-4 justify-content-between">
+                    <div class="col-auto">
+                        <p class="footer-bottom__text mb-0 text-white">© Copyright 🍀SENIORITY. All Rights Reserved</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>  
+  </body>

@@ -17,9 +17,12 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="../../assets/scripts/navbar.js" defer></script>
     <script src="../../assets/scripts/map-partners.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=<%= apiKey %>&callback=initMap" async defer></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=<%= apiKey %>&callback=initMap" defer></script>
     <script src="../../assets/scripts/logout.js" defer></script>
     <script src="../../assets/scripts/sideNavbar.js" defer></script>
+    <script>
+        var email = '<%= email %>';
+    </script>
 </head>
 <body>
     <header>
@@ -72,11 +75,12 @@
         </div> -->
         <ul class="sidebar__menu">
             <li class="sidebar__menu-item sidebar__menu-item--active"><a href="../explore/partners.html" class="sidebar__menu-item__link">Partners</a></li>
-            <li class="sidebar__menu-item"><a href="#" class="sidebar__menu-item__link">My New Home</a></li>
+            <li class="sidebar__menu-item"><a href="../explore/my-new-home.html" class="sidebar__menu-item__link">My New Home</a></li>
             <li class="sidebar__menu-item"><a href="#" class="sidebar__menu-item__link">My Activity</a></li>
         </ul>
     </div>
     <div class="menu-container">
+    
     <button class="btn btn--brand me-2" id="menuToggle">🛠️</button>
     <!-- <div id = "controls" class="controls">
         <button id="filterBtn">FILTER</button>
@@ -143,6 +147,7 @@
         </div>
     </footer>   
   <script>
+    
     let homesData;
     let selectedCriteria = { city: null, rating: null, contact: null }; 
     const filterElements = {};

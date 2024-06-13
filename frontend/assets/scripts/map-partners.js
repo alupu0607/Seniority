@@ -92,25 +92,9 @@ function clearMarkers() {
     }
 }
 
-// function apply(idRetirementHome) {
-//     const email = '<%= email %>';
-//     const applicationData = {
-//         idRetirementHome: idRetirementHome,
-//         idUser: 1 
-//     };
-
-//     performPostFetch('/api/applications/application', applicationData, 'same-origin')
-//         .then(data => {
-//             console.log('Application created successfully:', data);
-//         })
-//         .catch(error => {
-//             console.error('Error creating application:', error);
-//         });
-// }
-
 
 function apply(idRetirementHome) {
-    const email = '<%= email %>'; // Assuming you embed the email using EJS
+    console.log('Email:', email); 
     fetchUserId(email)
         .then(userId => {
             const applicationData = {
@@ -121,18 +105,21 @@ function apply(idRetirementHome) {
             performPostFetch('/api/applications/application', applicationData, 'same-origin')
                 .then(data => {
                     console.log('Application created successfully:', data);
+                    alert('Application created successfully');
                 })
                 .catch(error => {
                     console.error('Error creating application:', error);
+                    alert('Error creating application: ' + error.message);
                 });
         })
         .catch(error => {
             console.error('Error fetching user ID:', error);
+            alert('Error fetching user ID: ' + error.message);
         });
 }
 
 function fetchUserId(email) {
-    return fetch(`/api/users/${email}`, {
+    return fetch(`/api/users/user/${email}`, {
         method: 'GET',
         credentials: 'same-origin'
     })
@@ -176,3 +163,4 @@ function performPostFetch(url, data, credentials) {
         throw error; 
     });
 }
+
