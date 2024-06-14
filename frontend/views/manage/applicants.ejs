@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ 
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Seniority</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <link rel="stylesheet" href="../../main.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js" defer></script>
+    <script src="https://unpkg.com/aos@next/dist/aos.js" defer></script>
+    <script src="../../assets/scripts/about.js" defer></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="../../assets/scripts/navbar.js" defer></script>
+    <!-- <script src="../../assets/scripts/map-partners.js"></script> -->
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <script src="../../assets/scripts/logout.js" defer></script>
+    <script src="../../assets/scripts/sideNavbar.js" defer></script>
+    <script src="../../assets/scripts/applicants.js" defer></script>
+    <script> 
+        var id = '<%= id %>';
+    </script>
+    <style>
+    .card {
+        border-radius: 0;
+        background-color: transparent;
+        position: relative;
+        width: 22rem;
+        @media (max-width: 576px) {
+            width: 18rem; 
+        }
+    }
+    .close-button {
+        z-index: 300;
+        position: absolute;
+        top: 5px;
+        right: 10px;
+        background: transparent;
+        border: none;
+        font-size: 3rem; 
+        color: black;
+        cursor: pointer;
+        font-weight: bold; 
+    }
+    .close-button:hover {
+        color: black; 
+    }
+    .close-button:focus {
+        outline: none; 
+    }
+    .status-pending {
+      color: yellow;
+      font-weight: bold;
+    }
+    .status-approved {
+      color: green;
+      font-weight: bold;
+    }
+    .status-rejected {
+      color: red;
+      font-weight: bold;
+    }
+
+    .close-button {
+        z-index: 300;
+        position: absolute;
+        top: 5px;
+        right: 10px;
+        background: transparent;
+        border: none;
+        font-size: 3rem; 
+        color: black;
+        cursor: pointer;
+        font-weight: bold; 
+    }
+    .close-button:hover {
+        color: black; 
+    }
+    .close-button:focus {
+        outline: none; 
+    }
+
+    .incoming-requests {
+        text-align: center;
+        margin-top: 20px; 
+    }
+
+    .accepted-requests {
+        text-align: center;
+        margin-top: 40px; 
+    }
+
+    .incoming-requests h2, .accepted-requests h2 {
+        font-size: 2.5em; 
+        margin-bottom: 20px;
+        font-weight: bold;
+        color: #333; 
+    }
+
+
+    .animated-number {
+        font-size: 4em; 
+        font-weight: bold;
+        display: block;
+        margin: 0 auto; 
+    
+    }
+
+
+    #request-count {
+        color: #ff5722; 
+    }
+
+
+    #accepted-count {
+        color: #4caf50;
+    }
+
+    #about {
+        padding: 50px 0;
+    }
+
+    .carousel-control-prev,
+    .carousel-control-next {
+        z-index: 1000;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: auto;
+        background-color: rgba(212, 40, 40, 0.1);
+        transition: background-color 0.3s ease;
+    }
+
+    .carousel-control-prev {
+        left: -30px;
+    }
+
+    .carousel-control-next {
+        right: -30px;
+    }
+
+    .carousel-control-prev-icon,
+    .carousel-control-next-icon {
+        background-color: transparent;
+        border: none;
+    }
+
+    .carousel-control-prev:hover,
+    .carousel-control-next:hover {
+        background-color: rgba(0, 0, 0, 0.3);
+    }
+    </style>
+</head>
+<body>
+    <header>
+        <section class="navigation">
+           <div class="nav-container">
+             <div class="brand">
+               <a href="../info/about.html">🍀SENIORITY</a>
+             </div>
+             <nav>
+               <div class="nav-mobile">
+                 <a id="nav-toggle" href="#!"><span></span></a>
+               </div>
+               <ul class="nav-list">
+                 <% if (isAuthenticated) { %>
+                    <% if (accountType === 'User') { %>
+                      <li>
+                        <a href="#!">My Senior Account</a>
+                        <ul class="nav-dropdown">
+                            <li><a href="../info/explore.html">Explore</a></li>
+                          <li><a href="#!" class="non-clickable">Profile Settings</a></li>
+                          <li><a href="#!" onclick="logout()">Logout</a></li>
+                        </ul>
+                      </li>
+                    <% } else if (accountType === 'RetirementHome') { %>
+                      <li>
+                        <a href="#!">My Partner Account</a>
+                        <ul class="nav-dropdown">
+                          <li><a href="../manage/applicants.html">Manage</a></li>
+                          <li><a href="#!">Profile Details</a></li>
+                          <li><a href="#!" onclick="logout()">Logout</a></li>
+                        </ul>
+                      </li>
+                    <% } %>
+                  <% } else { %>
+                    <li><a href="../auth/signin.html">Login</a></li>
+                  <% } %>
+               </ul>
+             </nav>
+           </div>
+         </section>
+     </header>
+     <div class="sidebar-toggle-btn">
+        <span class="fas fa-bars"></span>
+    </div>
+
+    <div class="sidebar__container"  id="sidebar">
+        <!-- <div class="sidebar__header">
+            Side Menu
+        </div> -->
+        <ul class="sidebar__menu">
+            <li class="sidebar__menu-item sidebar__menu-item--active"><a href="../manage/applicants.html" class="sidebar__menu-item__link">Applicants</a></li>
+            <li class="sidebar__menu-item sidebar__menu-item"><a href="../manage/registered-seniors.html" class="sidebar__menu-item__link">Registered Seniors</a></li>
+            <li class="sidebar__menu-item"><a href="#" class="sidebar__menu-item__link">My Activity</a></li>
+        </ul>
+    </div>
+      <!-- ABOUT -->
+      <section id="about" class="section-padding">
+        <div class="container">
+            <div class="row">
+                <div data-aos="fade-down" data-aos-delay="50">
+                    <div class="section-title">
+                        <h1 class="display-4 fw-semibold text-center">Manage your applicants with ease.</h1>
+                        <div class = "line"></div>
+                        <!-- <p class = "text-center" style="font-size: var(--h1-font-size);">
+                            Beneath you can see your requests. Elevate your community by instantly updating applicant statuses with just a click!
+                        </p> -->
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-between align-items-center">
+                <div class="col-lg-6">
+                    <div class="accepted-requests  align-items-center">
+                        <h2>Approved Requests</h2>
+                        <div id="accepted-count" class="animated-number">0</div>
+                    </div>
+                    <div class="incoming-requests  align-items-center">
+                        <h2>Incoming Requests</h2>
+                        <div id="request-count" class="animated-number">0</div>
+                    </div>
+                </div>
+                <div data-aos="fade-down" data-aos-delay="150" class="col-lg-5"  >
+                    <div class="container d-flex justify-content-center align-items-center">
+                        <div id="noRequestsMessage">
+                            <img src="../../assets/images/undraw_undraw_undraw_undraw_undraw_undraw_undraw_undraw_undraw_search_engines_041x_-2-_cl95_o7o8_pigd_-1-_wbm3_t5p8_-1-_mt5l_-2-_dhxr_-2-_nmxe.svg" alt="No incoming requests" >
+                        </div>
+                        <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                            <div class="carousel-inner">
+                                <div class="carousel-item active" style = "background-color: transparent;">    
+                                    <div class="card" style=" height: 58vh; ">
+                                        <button class="close-button" aria-label="Close">&times;</button>
+                                        <div class="card-body">
+                                            <div class="row justify-content-center">
+                                                <div class="col-6 text-center"> 
+                                                    <button class="btn__text mt-3 mb-4" id="approveButton" onclick="approveApplication()">Approve</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <ul class="list-group list-group-light list-group-small">
+                                            <li class="list-group-item px-4" id="userName">Name: -- </li>
+                                            <li class="list-group-item px-4" id="userSurname">Surname: -- </li>
+                                            <li class="list-group-item px-4" id="userPhoneNumber">Phone Number: -- </li>
+                                            <li class="list-group-item px-4" id="userEmail">Email: -- </li>
+                                            <li class="list-group-item px-4" id="userBirthdate">Birthdate: -- </li>
+                                        </ul>
+                                        <div class="card-body">
+                                            <a href="#" class="card-link" id="retirementHomeWebsite"></a>
+                                            <a href="#" class="card-link"></a>
+                                        </div>
+                                    </div> 
+                                </div>
+                                <!-- <div class="carousel-item">
+                                </div> -->
+                            </div>
+
+                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </section>
+    </div>
+    <footer class="footer bg-dark">
+        <div class="footer-top">
+            <div class="container">
+                <div class="row gy-5">
+                    <div class="footer-top__item col-lg-3 col-sm-6">
+                        <h3 class="footer-top__title mb-0 text-white">🍀SENIORITY</h3>
+                        <div class="line"></div>
+                        <p class="text-white">Your retirement, made simpler.</p>
+                    </div>
+                    <div class="footer-top__item col-lg-3 col-sm-6">
+                        <h5 class="footer-top__title mb-0 text-white">SERVICES</h5>
+                        <div class="line"></div>
+                        <ul class="footer-top__list">
+                            <li><a href="#" class="text-white">AI Companion</a></li>
+                            <li><a href="#" class="text-white">Find a retirement home</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-top__item col-lg-3 col-sm-6">
+                        <h5 class="footer-top__title mb-0 text-white">ABOUT</h5>
+                        <div class="line"></div>
+                        <ul class="footer-top__list">
+                            <li><a href="#" class="text-white">Blog</a></li>
+                            <li><a href="#" class="text-white">Services</a></li>
+                            <li><a href="#" class="text-white">Company</a></li>
+                            <li><a href="#" class="text-white">Career</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-top__item col-lg-3 col-sm-6">
+                        <h5 class="footer-top__title mb-0 text-white">CONTACT</h5>
+                        <div class="line"></div>
+                        <ul class="footer-top__list">
+                            <li class="text-white">Iasi, Romania</li>
+                            <li class="text-white">+40756624999</li>
+                            <li class="text-white">0607andreea.ro@gmail.com</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <div class="row g-4 justify-content-between">
+                    <div class="col-auto">
+                        <p class="footer-bottom__text mb-0 text-white">© Copyright 🍀SENIORITY. All Rights Reserved</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>  
+  </body>

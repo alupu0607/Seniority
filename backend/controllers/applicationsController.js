@@ -1,5 +1,6 @@
 
 const Application = require('../models/Application');
+const RetirementHome = require('../models/RetirementHome');
 const User = require('../models/User');
 
 exports.postApplication = async (req, res) => {
@@ -66,5 +67,53 @@ exports.deleteApplicationsByUserEmail = async (req, res) => {
     } catch (error) {
         console.error('Error deleting applications by email:', error);
         res.status(500).json({ message: 'Error deleting applications' });
+    }
+};
+
+
+
+exports.getApplicationsByRetirementHomeId = async (req, res) => {
+    try {
+        const { id } = req.params;
+        console.log(id)
+        const retirementHome = await RetirementHome.findOne({
+            where: { id }
+        });
+        if (!retirementHome) {
+            return res.status(404).json({ message: 'Retirement home not found' });
+        }
+        const applications = await Application.findAll({
+            where: { idRetirementHome: retirementHome.id }
+        });
+
+        res.status(200).json(applications);
+    } catch (error) {
+        console.error('Error fetching applications by email:', error);
+        res.status(500).json({ message: 'Error fetching applications' });
+    }
+};
+
+
+
+exports.putApplicationByApplicationId = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { status } = req.body;
+        console.log(id)
+        const application = await Application.findOne({
+            where: { id }
+        });
+        if (!application) {
+            return res.status(404).json({ message: 'Application not found' });
+        }
+        application.application_status = status;
+        await application.save();
+        res.status(200).json({
+            message: 'Application updated successfully',
+            application
+        });
+    } catch (error) {
+        console.error('Error fetching applications by email:', error);
+        res.status(500).json({ message: 'Error fetching applications' });
     }
 };
