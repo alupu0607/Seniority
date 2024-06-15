@@ -34,30 +34,28 @@
                  <a id="nav-toggle" href="#!"><span></span></a>
                </div>
                <ul class="nav-list">
-                 <% if (isAuthenticated) { %>
-                    <% if (accountType === 'User') { %>
-                      <li>
-                        <a href="#!">My Senior Account</a>
-                        <ul class="nav-dropdown">
-                            <li><a href="../explore/partners.html">Explore</a></li>
-                          <li><a href="#!" class="non-clickable">Profile Settings</a></li>
-                          <li><a href="#!" onclick="logout()">Logout</a></li>
-                        </ul>
-                      </li>
-                    <% } else if (accountType === 'RetirementHome') { %>
-                      <li>
-                        <a href="#!">My Partner Account</a>
-                        <ul class="nav-dropdown">
-                          <li><a href="../manage/applicants.html">Manage</a></li>
-                          <li><a href="#!">Profile Details</a></li>
-                          <li><a href="#!" onclick="logout()">Logout</a></li>
-                        </ul>
-                      </li>
-                    <% } %>
-                  <% } else { %>
-                    <li><a href="../auth/signin.html">Login</a></li>
-                  <% } %>
-               </ul>
+                <% if (isAuthenticated) { %>
+                   <% if (accountType === 'User') { %>
+                     <li>
+                       <a href="#!">My Senior Account</a>
+                       <ul class="nav-dropdown">
+                         <li><a href="../explore/partners.html">Explore</a></li>
+                         <li><a href="#!" onclick="logout()">Logout</a></li>
+                       </ul>
+                     </li>
+                   <% } else if (accountType === 'RetirementHome') { %>
+                     <li>
+                       <a href="#!">My Partner Account</a>
+                       <ul class="nav-dropdown">
+                         <li><a href="../manage/applicants.html">Manage</a></li>
+                         <li><a href="#!" onclick="logout()">Logout</a></li>
+                       </ul>
+                     </li>
+                   <% } %>
+                 <% } else { %>
+                   <li><a href="../auth/signin.html">Login</a></li>
+                 <% } %>
+              </ul>
              </nav>
            </div>
          </section>
@@ -71,7 +69,7 @@
                     <h1 data-aos="fade-left" class="text-uppercase text-white fw-semibold display-1">Welcome to SENIORITY</h1>
                     <h5 class=" btn__text text-white mt-3 mb-4" data-aos="fade-right" >where your retirement journey begins with personalized care and empowered choices, backed by innovative AI for cognitive wellness.</h5>
                     <div data-aos="fade-up" data-aos-delay="50">
-                        <a href="#" class="btn btn--brand me-2">Get Started</a>
+                        <!-- <a href="#" class="btn btn--brand me-2">Get Started</a> -->
                         <a href="../info/ai.html" class="btn btn-light ms-2">Meet our AI companion</a>
                     </div>
                 </div>

@@ -66,25 +66,6 @@
       font-weight: bold;
     }
 
-    .close-button {
-        z-index: 300;
-        position: absolute;
-        top: 5px;
-        right: 10px;
-        background: transparent;
-        border: none;
-        font-size: 3rem; 
-        color: black;
-        cursor: pointer;
-        font-weight: bold; 
-    }
-    .close-button:hover {
-        color: black; 
-    }
-    .close-button:focus {
-        outline: none; 
-    }
-
     .incoming-requests {
         text-align: center;
         margin-top: 20px; 
@@ -168,30 +149,28 @@
                  <a id="nav-toggle" href="#!"><span></span></a>
                </div>
                <ul class="nav-list">
-                 <% if (isAuthenticated) { %>
-                    <% if (accountType === 'User') { %>
-                      <li>
-                        <a href="#!">My Senior Account</a>
-                        <ul class="nav-dropdown">
-                            <li><a href="../info/explore.html">Explore</a></li>
-                          <li><a href="#!" class="non-clickable">Profile Settings</a></li>
-                          <li><a href="#!" onclick="logout()">Logout</a></li>
-                        </ul>
-                      </li>
-                    <% } else if (accountType === 'RetirementHome') { %>
-                      <li>
-                        <a href="#!">My Partner Account</a>
-                        <ul class="nav-dropdown">
-                          <li><a href="../manage/applicants.html">Manage</a></li>
-                          <li><a href="#!">Profile Details</a></li>
-                          <li><a href="#!" onclick="logout()">Logout</a></li>
-                        </ul>
-                      </li>
-                    <% } %>
-                  <% } else { %>
-                    <li><a href="../auth/signin.html">Login</a></li>
-                  <% } %>
-               </ul>
+                <% if (isAuthenticated) { %>
+                   <% if (accountType === 'User') { %>
+                     <li>
+                       <a href="#!">My Senior Account</a>
+                       <ul class="nav-dropdown">
+                        <li><a href="../explore/partners.html">Explore</a></li>
+                        <li><a href="#!" onclick="logout()">Logout</a></li>
+                       </ul>
+                     </li>
+                   <% } else if (accountType === 'RetirementHome') { %>
+                     <li>
+                       <a href="#!">My Partner Account</a>
+                       <ul class="nav-dropdown">
+                         <li><a href="../manage/applicants.html">Manage</a></li>
+                         <li><a href="#!" onclick="logout()">Logout</a></li>
+                       </ul>
+                     </li>
+                   <% } %>
+                 <% } else { %>
+                   <li><a href="../auth/signin.html">Login</a></li>
+                 <% } %>
+              </ul>
              </nav>
            </div>
          </section>
@@ -207,7 +186,6 @@
         <ul class="sidebar__menu">
             <li class="sidebar__menu-item sidebar__menu-item--active"><a href="../manage/applicants.html" class="sidebar__menu-item__link">Applicants</a></li>
             <li class="sidebar__menu-item sidebar__menu-item"><a href="../manage/registered-seniors.html" class="sidebar__menu-item__link">Registered Seniors</a></li>
-            <li class="sidebar__menu-item"><a href="#" class="sidebar__menu-item__link">My Activity</a></li>
         </ul>
     </div>
       <!-- ABOUT -->

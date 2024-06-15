@@ -54,11 +54,6 @@ const signinCheck = (passport) => {
     })
   );
 
-  // the user can be either senior user or retirement home user
-  // passport.serializeUser((user, done) => {
-  //   console.log("heeloooo", user);
-  //   done(null, user.id);
-  // });
   passport.serializeUser((userOrRetirementHome, done) => {
     console.log("Object type", userOrRetirementHome.constructor)
     let type;

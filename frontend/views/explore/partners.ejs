@@ -36,31 +36,28 @@
                  <a id="nav-toggle" href="#!"><span></span></a>
                </div>
                <ul class="nav-list">
-                 <% if (isAuthenticated) { %>
-                    <% if (accountType === 'User') { %>
-                      <li>
-                        <a href="#!">My Senior Account</a>
-                        <ul class="nav-dropdown">
-                            <li><a href="../info/explore.html">Explore</a></li>
-                          <li><a href="#!" class="non-clickable">Profile Settings</a></li>
-                          <li><a href="#!" onclick="logout()">Logout</a></li>
-                        </ul>
-                      </li>
-                    <% } else if (accountType === 'RetirementHome') { %>
-                      <li>
-                        <a href="#!">My Partner Account</a>
-                        <ul class="nav-dropdown">
-                          <li><a href="#!" class="non-clickable">Welcome, <%= email %></a></li>
-                          <li><a href="#!">Manage</a></li>
-                          <li><a href="#!">Profile Details</a></li>
-                          <li><a href="#!" onclick="logout()">Logout</a></li>
-                        </ul>
-                      </li>
-                    <% } %>
-                  <% } else { %>
-                    <li><a href="../auth/signin.html">Login</a></li>
-                  <% } %>
-               </ul>
+                <% if (isAuthenticated) { %>
+                   <% if (accountType === 'User') { %>
+                     <li>
+                       <a href="#!">My Senior Account</a>
+                       <ul class="nav-dropdown">
+                         <li><a href="../explore/partners.html">Explore</a></li>
+                         <li><a href="#!" onclick="logout()">Logout</a></li>
+                       </ul>
+                     </li>
+                   <% } else if (accountType === 'RetirementHome') { %>
+                     <li>
+                       <a href="#!">My Partner Account</a>
+                       <ul class="nav-dropdown">
+                         <li><a href="../manage/applicants.html">Manage</a></li>
+                         <li><a href="#!" onclick="logout()">Logout</a></li>
+                       </ul>
+                     </li>
+                   <% } %>
+                 <% } else { %>
+                   <li><a href="../auth/signin.html">Login</a></li>
+                 <% } %>
+              </ul>
              </nav>
            </div>
          </section>
@@ -76,7 +73,6 @@
         <ul class="sidebar__menu">
             <li class="sidebar__menu-item sidebar__menu-item--active"><a href="../explore/partners.html" class="sidebar__menu-item__link">Partners</a></li>
             <li class="sidebar__menu-item"><a href="../explore/my-new-home.html" class="sidebar__menu-item__link">My New Home</a></li>
-            <li class="sidebar__menu-item"><a href="#" class="sidebar__menu-item__link">My Activity</a></li>
         </ul>
     </div>
     <div class="menu-container">
