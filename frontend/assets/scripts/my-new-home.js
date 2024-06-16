@@ -120,8 +120,12 @@ function displayRetirementHomeData(retirementHome) {
     document.getElementById('retirementHomePhoneNumber').textContent = retirementHome.phone_number;
     document.getElementById('retirementHomeWebsite').href = retirementHome.website;
     document.getElementById('retirementHomeWebsite').textContent = 'Visit Website';
-}
 
+
+  // Verific data e approved 
+  // const uploadButton = document.getElementById('uploadDocumentButton');
+  // uploadButton.addEventListener('click', handleUploadDocument);
+}
 
 
 

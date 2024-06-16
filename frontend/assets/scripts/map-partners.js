@@ -3,7 +3,7 @@ let infowindow;
 let slideIndex = 1;
 let markers = [];
 
-function initMap(filtered_data) {
+function initMap(filtered_data, no_response) {
     if (map) {
         clearMarkers();
     } else {
@@ -19,6 +19,16 @@ function initMap(filtered_data) {
         filtered_data.forEach(createMarker);
     }
     else{
+
+        if (no_response == true){
+            const centerOfRomania = new google.maps.LatLng(45.9432, 24.9668);
+            map = new google.maps.Map(document.getElementById("map-partners"), {
+                center: centerOfRomania,
+                zoom: 7
+            });
+            infowindow = new google.maps.InfoWindow();
+            return;
+        }
         console.log('null data, initial');
         const centerOfRomania = new google.maps.LatLng(45.9432, 24.9668);
         map = new google.maps.Map(document.getElementById("map-partners"), {
@@ -42,6 +52,7 @@ function initMap(filtered_data) {
             console.error('Error loading retirement home data:', error);
             });
     }
+    
 }
 
 function createMarker(place) {
@@ -62,7 +73,7 @@ function createMarker(place) {
         `;
       });
     }
-    place.status = 'available';
+
     const status = place.status === 'available' ? '<span style="color: green;">Available</span>' : '<span style="color: red;">Unavailable</span>';
     const applyButton = place.status === 'available' ? `<button onclick="apply(${place.id})">Apply</button>` : '';
     const content = `

@@ -2002,4 +2002,21 @@ img {
 .partners__content__map {
   height: 100vh;
   width: 100%;
+}
+
+.sticky-note {
+  z-index: 500;
+  position: absolute;
+  top: 70px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--c-brand);
+  padding: 10px;
+  z-index: 1000;
+}
+
+.note-text {
+  margin: 0;
+  font-size: 15px;
+  color: white;
 }/*# sourceMappingURL=main.css.map */

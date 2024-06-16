@@ -67,20 +67,20 @@
 <body>
     <header>
         <section class="navigation">
-           <div class="nav-container">
+           <div class="nav-container" style = "z-index: 10000;">
              <div class="brand">
                <a href="../info/about.html">🍀SENIORITY</a>
              </div>
              <nav>
-               <div class="nav-mobile">
+               <div class="nav-mobile" style = "z-index: 10000;">
                  <a id="nav-toggle" href="#!"><span></span></a>
                </div>
-               <ul class="nav-list">
+               <ul class="nav-list" style = "z-index: 10000;">
                  <% if (isAuthenticated) { %>
                     <% if (accountType === 'User') { %>
                       <li>
                         <a href="#!">My Senior Account</a>
-                        <ul class="nav-dropdown">
+                        <ul class="nav-dropdown" style = "z-index: 10000;">
                           <li><a href="../explore/partners.html">Explore</a></li>
                           <li><a href="#!" onclick="logout()">Logout</a></li>
                         </ul>
@@ -88,7 +88,7 @@
                     <% } else if (accountType === 'RetirementHome') { %>
                       <li>
                         <a href="#!">My Partner Account</a>
-                        <ul class="nav-dropdown">
+                        <ul class="nav-dropdown" style = "z-index: 10000;">
                           <li><a href="../manage/applicants.html">Manage</a></li>
                           <li><a href="#!" onclick="logout()">Logout</a></li>
                         </ul>
@@ -116,7 +116,9 @@
         </ul>
     </div>
         <div class="container d-flex justify-content-center align-items-center full-height">
-            <div class="card" style="width: 22rem; height: 100vh;">
+
+            <div class="card" style="width: 22rem; ">
+              
                 <button class="close-button" aria-label="Close">&times;</button>
                 <div class="card-img-top" id="mapRetirementHome" style="height: 50vh; width: 100%; background-image: url('../../assets/images/question-mark.jpg');";></div>
                
@@ -132,13 +134,26 @@
                     <a href="#" class="list-group-item px-4" id="retirementHomeWebsite" style = "color: blue;">Website: --</a>
                 </ul>
                 <div class="card-body">
-                    <a href="#" class="card-link" id="retirementHomeWebsite"></a>
-                    <a href="#" class="card-link"></a>
                 </div>
+
+                <!-- <div class="card-body">
+                  <div id="uploadDocumentsSection">
+                    <ul id="uploadedFilesList">Uploaded Files: --</ul>
+                    <input type="file" id="documentUploadInput" accept=".doc, .docx, .pdf, .jpg, .jpeg, .png">
+                    <button id="uploadDocumentButton">Upload Document</button>
+                  </div>
+                </div> -->
             </div>
             
+            <div id="uploadDocumentsSection" style="display: none;">
+              <input type="file" id="documentUploadInput" accept=".doc, .docx, .pdf, .jpg, .jpeg, .png">
+              <button id="uploadDocumentButton">Upload Document</button>
+            </div>
             
           </div>
+
+        
+        
 
     <footer class="footer bg-dark">
         <div class="footer-top">

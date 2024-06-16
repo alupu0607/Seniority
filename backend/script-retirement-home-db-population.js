@@ -21,6 +21,7 @@ const hashedPassword = bcrypt.hashSync(process.env.RETIREMENT_HOME_PASSWORD, 10)
           latitude: homeData.latitude,
           longitude: homeData.longitude,
           password: hashedPassword,
+          status: homeData.status,
           isVerified: true,
           verificationToken: verificationToken,
         });

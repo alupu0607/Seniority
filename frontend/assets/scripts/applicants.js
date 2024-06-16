@@ -122,8 +122,50 @@ document.addEventListener('DOMContentLoaded', () => {
         return parseInt(document.getElementById('request-count').textContent);
     }
 
-    window.removeApplication = function(applicationId) {
+    // This is not currently used anymore 
+    window.rejectApplication = async function(applicationId) {
+        console.log(`Reject application with ID: ${applicationId}`);
+        try {
+            const response = await fetch(`/api/applications/application/reject/${applicationId}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ status: 'REJECTED' })
+            });
+    
+            if (!response.ok) {
+                throw new Error('Failed to reject application');
+            }
+    
+            const data = await response.json();
+            console.log(data.message);
+        } catch (error) {
+            console.error('Error rejecting application:', error.message);
+        }
+    }
+
+    window.removeApplication = async function(applicationId) {
         console.log(`Remove application with ID: ${applicationId}`);
+        try {
+
+            const response = await fetch(`/api/applications/application/id/${applicationId}`, {
+              method: 'DELETE',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+            });
+        
+            if (!response.ok) {
+              throw new Error('Failed to delete application');
+            }
+        
+            const data = await response.json();
+            console.log(data.message); 
+            location.reload();
+          } catch (error) {
+            console.error('Error deleting application:', error.message);
+          }
     }
 
     window.approveApplication = async function(applicationId) {

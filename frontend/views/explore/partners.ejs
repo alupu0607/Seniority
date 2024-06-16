@@ -26,21 +26,21 @@
 </head>
 <body>
     <header>
-        <section class="navigation">
+        <section class="navigation" style = "z-index: 10000;">
            <div class="nav-container">
              <div class="brand">
                <a href="../info/about.html">🍀SENIORITY</a>
              </div>
              <nav>
-               <div class="nav-mobile">
+               <div class="nav-mobile" style = "z-index: 10000;">
                  <a id="nav-toggle" href="#!"><span></span></a>
                </div>
-               <ul class="nav-list">
+               <ul class="nav-list" style = "z-index: 10000;">
                 <% if (isAuthenticated) { %>
                    <% if (accountType === 'User') { %>
                      <li>
                        <a href="#!">My Senior Account</a>
-                       <ul class="nav-dropdown">
+                       <ul class="nav-dropdown" style = "z-index: 10000;">
                          <li><a href="../explore/partners.html">Explore</a></li>
                          <li><a href="#!" onclick="logout()">Logout</a></li>
                        </ul>
@@ -48,7 +48,7 @@
                    <% } else if (accountType === 'RetirementHome') { %>
                      <li>
                        <a href="#!">My Partner Account</a>
-                       <ul class="nav-dropdown">
+                       <ul class="nav-dropdown" style = "z-index: 10000;">
                          <li><a href="../manage/applicants.html">Manage</a></li>
                          <li><a href="#!" onclick="logout()">Logout</a></li>
                        </ul>
@@ -62,11 +62,12 @@
            </div>
          </section>
      </header>
+    
      <div class="sidebar-toggle-btn">
         <span class="fas fa-bars"></span>
     </div>
 
-    <div class="sidebar__container"  id="sidebar">
+    <div class="sidebar__container"  id="sidebar" style = "z-index: 10000;">
         <!-- <div class="sidebar__header">
             Side Menu
         </div> -->
@@ -78,17 +79,14 @@
     <div class="menu-container">
     
     <button class="btn btn--brand me-2" id="menuToggle">🛠️</button>
-    <!-- <div id = "controls" class="controls">
-        <button id="filterBtn">FILTER</button>
-        <button id="clearBtn">CLEAR FILTERS</button>
-      </div> -->
+  
     <ul id="menu" class="menu"></ul>
     </div>
 
-  <!-- <div id = "controls" class="controls">
-    <button id="filterBtn">FILTER</button>
-    <button id="clearBtn">CLEAR FILTERS</button>
-  </div> -->
+
+  <div class="sticky-note">
+      <p class="note-text">Limiting applications to one per senior for a seamless experience!</p>
+  </div>
   <div id="map-partners" style = "height: 100vh;
     width: 100%;"></div>
 
@@ -143,173 +141,203 @@
         </div>
     </footer>   
   <script>
+  
+let homesData;
+let selectedCriteria = { city: null, rating: null, contact: null, status: null }; 
+const filterElements = {};
+
+function buildMenu(data) {
+  homesData = data; 
+  const { cities, ratings, contact, status } = processHomesData(data);
+  const menu = document.getElementById('menu');
+
+  const cityMenu = document.createElement('li');
+  cityMenu.innerText = 'Cities';
+  const citySubmenu = document.createElement('ul');
+  citySubmenu.className = 'submenu';
+
+  Object.keys(cities).forEach(city => {
+    const cityItem = document.createElement('li');
+    cityItem.innerText = city;
+    cityItem.addEventListener('click', () => handleFilterSelection('city', city, cityItem));
+    citySubmenu.appendChild(cityItem);
+    filterElements[city] = cityItem; 
+  });
+
+  cityMenu.appendChild(citySubmenu);
+  menu.appendChild(cityMenu);
+
+  const ratingMenu = document.createElement('li');
+  ratingMenu.innerText = 'Rating';
+  const ratingSubmenu = document.createElement('ul');
+  ratingSubmenu.className = 'submenu';
+
+  Object.keys(ratings).forEach(rating => {
+    const ratingItem = document.createElement('li');
+    ratingItem.innerText = rating;
+    ratingItem.addEventListener('click', () => handleFilterSelection('rating', rating, ratingItem));
+    ratingItem.addEventListener('dblclick', () => handleFilterDeselection('rating', ratingItem));
+    ratingSubmenu.appendChild(ratingItem);
+    filterElements[rating] = ratingItem;
+  });
+
+  ratingMenu.appendChild(ratingSubmenu);
+  menu.appendChild(ratingMenu);
+
+  const contactMenu = document.createElement('li');
+  contactMenu.innerText = 'Contact Information';
+  const contactSubmenu = document.createElement('ul');
+  contactSubmenu.className = 'submenu';
+
+  Object.keys(contact).forEach(contactType => {
+    const contactItem = document.createElement('li');
+    contactItem.innerText = contactType;
+    contactItem.addEventListener('click', () => handleFilterSelection('contact', contactType, contactItem));
+    contactItem.addEventListener('dblclick', () => handleFilterDeselection('contact', contactItem));
+    contactSubmenu.appendChild(contactItem);
+    filterElements[contactType] = contactItem;
+  });
+
+  contactMenu.appendChild(contactSubmenu);
+  menu.appendChild(contactMenu);
+
+  const statusMenu = document.createElement('li');
+  statusMenu.innerText = 'Status';
+  const statusSubmenu = document.createElement('ul');
+  statusSubmenu.className = 'submenu';
+
+  ['Available', 'Unavailable'].forEach(status => {
+    const statusItem = document.createElement('li');
+    statusItem.innerText = status;
+    statusItem.addEventListener('click', () => handleFilterSelection('status', status, statusItem));
+    statusItem.addEventListener('dblclick', () => handleFilterDeselection('status', statusItem));
+    statusSubmenu.appendChild(statusItem);
+    filterElements[status] = statusItem;
+  });
+
+  statusMenu.appendChild(statusSubmenu);
+  menu.appendChild(statusMenu);
+}
+
+function handleFilterSelection(type, value, element) {
+  if (selectedCriteria[type] === value) {
+    selectedCriteria[type] = null;
+    console.log(`Deselected ${type}: ${value}`);
+    logIntersection();
+    element.classList.remove('active-filter');
+  } else {
+    if (selectedCriteria[type] && filterElements[selectedCriteria[type]]) {
+      filterElements[selectedCriteria[type]].classList.remove('active-filter');
+      logIntersection();
+    }
     
-    let homesData;
-    let selectedCriteria = { city: null, rating: null, contact: null }; 
-    const filterElements = {};
+    selectedCriteria[type] = value;
+    console.log(`Selected ${type}: ${value}`);
+    
+    element.classList.add('active-filter');
+    logIntersection();
+  }
+}
 
-    function buildMenu(data) {
-      homesData = data; 
-      const { cities, ratings, contact } = processHomesData(data);
-      const menu = document.getElementById('menu');
+function logIntersection() {
+  if (!homesData) return;
 
-      const cityMenu = document.createElement('li');
-      cityMenu.innerText = 'Cities';
-      const citySubmenu = document.createElement('ul');
-      citySubmenu.className = 'submenu';
+  let filteredHomes = homesData.slice(); // Create a shallow copy of homesData
 
-      Object.keys(cities).forEach(city => {
-        const cityItem = document.createElement('li');
-        cityItem.innerText = city;
-        cityItem.addEventListener('click', () => handleFilterSelection('city', city, cityItem));
-        citySubmenu.appendChild(cityItem);
-        filterElements[city] = cityItem; 
-      });
-
-      cityMenu.appendChild(citySubmenu);
-      menu.appendChild(cityMenu);
-
-      const ratingMenu = document.createElement('li');
-      ratingMenu.innerText = 'Rating';
-      const ratingSubmenu = document.createElement('ul');
-      ratingSubmenu.className = 'submenu';
-
-      Object.keys(ratings).forEach(rating => {
-        const ratingItem = document.createElement('li');
-        ratingItem.innerText = rating;
-        ratingItem.addEventListener('click', () => handleFilterSelection('rating', rating, ratingItem));
-        ratingItem.addEventListener('dblclick', () => handleFilterDeselection('rating', ratingItem));
-        ratingSubmenu.appendChild(ratingItem);
-        filterElements[rating] = ratingItem;
-      });
-
-      ratingMenu.appendChild(ratingSubmenu);
-      menu.appendChild(ratingMenu);
-
-      const contactMenu = document.createElement('li');
-      contactMenu.innerText = 'Contact Information';
-      const contactSubmenu = document.createElement('ul');
-      contactSubmenu.className = 'submenu';
-
-      Object.keys(contact).forEach(contactType => {
-        const contactItem = document.createElement('li');
-        contactItem.innerText = contactType;
-        contactItem.addEventListener('click', () => handleFilterSelection('contact', contactType, contactItem));
-        contactItem.addEventListener('dblclick', () => handleFilterDeselection('contact', contactItem));
-        contactSubmenu.appendChild(contactItem);
-        filterElements[contactType] = contactItem;
-      });
-
-      contactMenu.appendChild(contactSubmenu);
-      menu.appendChild(contactMenu);
-    }
-
-    function handleFilterSelection(type, value, element) {
-    if (selectedCriteria[type] === value) {
-        selectedCriteria[type] = null;
-        console.log(`Deselected ${type}: ${value}`);
-        logIntersection();
-        element.classList.remove('active-filter');
-    } else {
-        if (selectedCriteria[type] && filterElements[selectedCriteria[type]]) {
-        filterElements[selectedCriteria[type]].classList.remove('active-filter');
-        logIntersection();
-        }
-        
-        selectedCriteria[type] = value;
-        console.log(`Selected ${type}: ${value}`);
-        
-        element.classList.add('active-filter');
-        logIntersection();
-    }
-    }
-
-    function logIntersection() {
-      if (!homesData) return;
-
-      let filteredHomes = homesData;
-      if (selectedCriteria.city) {
-        filteredHomes = filteredHomes.filter(home => home.city === selectedCriteria.city);
-      }
-      if (selectedCriteria.rating) {
-        filteredHomes = filteredHomes.filter(home => {
-          if (selectedCriteria.rating === '> 4.5') return home.rating > 4.5;
-          if (selectedCriteria.rating === '3.5 - 4.5') return home.rating > 3.5 && home.rating <= 4.5;
-          if (selectedCriteria.rating === '< 3.5') return home.rating < 3.5;
-        });
-      }
-      if (selectedCriteria.contact) {
-        if (selectedCriteria.contact === 'Website Available') {
-          filteredHomes = filteredHomes.filter(home => home.website !== 'N/A');
-        }
-        if (selectedCriteria.contact === 'Phone Available') {
-          filteredHomes = filteredHomes.filter(home => home.phone_number !== 'N/A');
-        }
-      }
-
-      console.log('Filtered Homes:', filteredHomes);
-      initMap(filteredHomes);
-    }
-
-    fetch('/api/retirement-home-managment/retirement-homes')
-      .then(response => response.json())
-      .then(data => {
-        if (Array.isArray(data)) {
-          buildMenu(data);
-        } else {
-          console.error('Retirement home data is not an array:', data);
-        }
-      })
-      .catch(error => {
-        console.error('Error loading retirement home data:', error);
-      });
-
-    function processHomesData(homes) {
-      console.log(homes);
-      const cities = {};
-      const ratings = { '> 4.5': [], '3.5 - 4.5': [], '< 3.5': [] };
-      const contact = { 'Website Available': [], 'Phone Available': [] };
-
-      homes.forEach(home => {
-        if (!cities[home.city]) {
-          cities[home.city] = [];
-        }
-        cities[home.city].push(home);
-
-        if (home.rating > 4.5) {
-          ratings['> 4.5'].push(home);
-        } else if (home.rating > 3.5 && home.rating <= 4.5) {
-          ratings['3.5 - 4.5'].push(home);
-        } else {
-          ratings['< 3.5'].push(home);
-        }
-
-        if (home.website !== 'N/A') {
-          contact['Website Available'].push(home);
-        }
-        if (home.phone_number !== 'N/A') {
-          contact['Phone Available'].push(home);
-        }
-      });
-
-      return { cities, ratings, contact };
-    }
-
-    //   document.getElementById('filterBtn').addEventListener('click', logIntersection);
-    //   document.getElementById('clearBtn').addEventListener('click', () => {
-    //   selectedCriteria = { city: null, rating: null, contact: null };
-
-    //   Object.values(filterElements).forEach(element => element.classList.remove('active-filter'));
-    //   console.log('All Homes:', homesData);
-    //   initMap(homesData);
-    // });
-
-    document.getElementById('menuToggle').addEventListener('click', function() {
-    const menu = document.getElementById('menu');
-    const controls = document.getElementById('controls');
-    menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
-    controls.style.display = controls.style.display === 'block' ? 'none' : 'block';
+  if (selectedCriteria.city) {
+    filteredHomes = filteredHomes.filter(home => home.city === selectedCriteria.city);
+  }
+  if (selectedCriteria.rating) {
+    filteredHomes = filteredHomes.filter(home => {
+      if (selectedCriteria.rating === '> 4.5') return home.rating > 4.5;
+      if (selectedCriteria.rating === '3.5 - 4.5') return home.rating > 3.5 && home.rating <= 4.5;
+      if (selectedCriteria.rating === '< 3.5') return home.rating < 3.5;
     });
+  }
+  if (selectedCriteria.contact) {
+    if (selectedCriteria.contact === 'Website Available') {
+      filteredHomes = filteredHomes.filter(home => home.website !== 'N/A');
+    }
+    if (selectedCriteria.contact === 'Phone Available') {
+      filteredHomes = filteredHomes.filter(home => home.phone_number !== 'N/A');
+    }
+  }
+  if (selectedCriteria.status) {
+    if (selectedCriteria.status === 'Available') {
+      filteredHomes = filteredHomes.filter(home => home.status === 'available');
+    }
+    if (selectedCriteria.status === 'Unavailable') {
+      filteredHomes = filteredHomes.filter(home => home.status === 'unavailable');
+    }
+  }
+
+  console.log('Filtered Homes:', filteredHomes);
+  if(filteredHomes.length === 0 ){
+    initMap([], true);
+  }
+  else{
+    initMap(filteredHomes);
+  }
+}
+
+fetch('/api/retirement-home-managment/retirement-homes')
+  .then(response => response.json())
+  .then(data => {
+    if (Array.isArray(data)) {
+      buildMenu(data);
+    } else {
+      console.error('Retirement home data is not an array:', data);
+    }
+  })
+  .catch(error => {
+    console.error('Error loading retirement home data:', error);
+  });
+
+function processHomesData(homes) {
+  console.log(homes);
+  const cities = {};
+  const ratings = { '> 4.5': [], '3.5 - 4.5': [], '< 3.5': [] };
+  const contact = { 'Website Available': [], 'Phone Available': [] };
+  const status = { 'Available': [], 'Unavailable': [] };
+
+  homes.forEach(home => {
+    if (!cities[home.city]) {
+      cities[home.city] = [];
+    }
+    cities[home.city].push(home);
+
+    if (home.rating > 4.5) {
+      ratings['> 4.5'].push(home);
+    } else if (home.rating > 3.5 && home.rating <= 4.5) {
+      ratings['3.5 - 4.5'].push(home);
+    } else {
+      ratings['< 3.5'].push(home);
+    }
+
+    if (home.website !== 'N/A') {
+      contact['Website Available'].push(home);
+    }
+    if (home.phone_number !== 'N/A') {
+      contact['Phone Available'].push(home);
+    }
+
+    if (home.status === 'available') {
+      status['Available'].push(home);
+    }
+    if (home.status === 'unavailable') {
+      status['Unavailable'].push(home);
+    }
+  });
+
+  return { cities, ratings, contact, status };
+}
+
+document.getElementById('menuToggle').addEventListener('click', function() {
+  const menu = document.getElementById('menu');
+  const controls = document.getElementById('controls');
+  menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+  controls.style.display = controls.style.display === 'block' ? 'none' : 'block';
+});
 
   </script>
 </body>

@@ -8,11 +8,11 @@ exports.postApplication = async (req, res) => {
         const { idRetirementHome, idUser } = req.body;
 
         const existingApplication = await Application.findOne({
-            where: { idUser }
+            where: { idUser}
         });
 
         if (existingApplication) {
-            return res.status(409).json({ message: 'User has already made an application' });
+            return res.status(409).json({ message: 'User has already made an application which was approved' });
         }
 
         const newApplication = await Application.create({
@@ -71,6 +71,40 @@ exports.deleteApplicationsByUserEmail = async (req, res) => {
 };
 
 
+exports.deleteApplicationsByApplicationId = async (req, res) => {
+    try {
+        const { applicationId } = req.params;
+
+        await Application.destroy({
+            where: { id: applicationId }
+        });
+
+        res.status(200).json({ message: 'Applications deleted successfully' });
+    } catch (error) {
+        console.error('Error deleting applications by email:', error);
+        res.status(500).json({ message: 'Error deleting applications' });
+    }
+};
+
+
+exports.putRejectApplicationByApplicationId = async (req, res) => {
+    try {
+        const { applicationId } = req.params;
+
+        const application = await Application.findByPk(applicationId);
+
+        if (!application) {
+            return res.status(404).json({ message: 'Application not found' });
+        }
+
+        await application.update({ application_status: 'REJECTED' });
+
+        res.status(200).json({ message: 'Application status updated to REJECTED' });
+    } catch (error) {
+        console.error('Error rejecting application:', error);
+        res.status(500).json({ message: 'Error rejecting application' });
+    }
+};
 
 exports.getApplicationsByRetirementHomeId = async (req, res) => {
     try {
