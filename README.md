@@ -1,4 +1,6 @@
-# Device Web Recommender
+# Seniority - Elderly Care Platform
+
+Seniority is a bridge between trustworthy retirement homes and seniors. By integrating it with a NLP chatbot for cognitive decline prevention which has both Text-To-Speech and Speech-To-Text capabilities, seniors benefit from a gamified inclusive experience powered by artificial intelligence. 
 
 ## Installation
 
@@ -11,12 +13,17 @@ cd Seniority
 
 ## Technologies
 - Front-end: SASS, BEM, CSS, HTML, JavaScript
-- Back-end: Express, Node.js, JavaScript, PostgreSql, Passport.js
+- Back-end: Express, Node.js, JavaScript, EJS, PostgreSql, Passport.js
 
 ## Features
 - MVC architecture 
-- SQL injection prevention via Sequelize queries
-- Complete authentication
+- Authentication and authorization
+- Multitenant architecture (seniors can: visualize partenered retirement homes, apply to a retirement home; retirement homes can: manage applicants, manage associated seniors)
+- NLP Chatbot Integration for cognitive decline prevention (https://github.com/alupu0607/NLP-CognitiveDecline-Chatbot)
+
+![Partenered retirement homes](https://github.com/alupu0607/Seniority/blob/master/readme_assets/senior_parteners.png)
+![Retireme homes applicants](https://github.com/alupu0607/Seniority/blob/master/readme_assets/retirement-home-application.png)
+![Chatbot](https://github.com/alupu0607/Seniority/blob/master/readme_assets/chatbot.png)
 
 
 ## Usage
@@ -41,6 +48,3 @@ In progress
 
 Lupu Andreea-Daniela
 
-## License
-
-[MIT](https://choosealicense.com/licenses/mit/)
