@@ -21,11 +21,14 @@ cd Seniority
 - Multitenant architecture (seniors can: visualize partenered retirement homes, apply to a retirement home; retirement homes can: manage applicants, manage associated seniors)
 - NLP Chatbot Integration for cognitive decline prevention (https://github.com/alupu0607/NLP-CognitiveDecline-Chatbot)
 
-<img src="https://github.com/alupu0607/Seniority/blob/master/readme_assets/senior_parteners.png" alt="Partenered retirement homes" width="400">
+# Centered Images
 
-<img src="https://github.com/alupu0607/Seniority/blob/master/readme_assets/retirement-home-application.png" alt="Retirement homes applicants" width="400">
+<div style="text-align: center;">
+    <img src="https://github.com/alupu0607/Seniority/blob/master/readme_assets/senior_parteners.png" alt="Partenered retirement homes" width="400">
+    <img src="https://github.com/alupu0607/Seniority/blob/master/readme_assets/retirement-home-application.png" alt="Retirement homes applicants" width="400">
+    <img src="https://github.com/alupu0607/Seniority/blob/master/readme_assets/chatbot.png" alt="Chatbot" width="400">
+</div>
 
-<img src="https://github.com/alupu0607/Seniority/blob/master/readme_assets/chatbot.png" alt="Chatbot" width="400">
 
 
 ## Usage
